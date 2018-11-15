@@ -22,3 +22,14 @@ This links to an online user-interface where one can plot gene expression and qu
   - "Annotation": Either "undiff" or one of ten mature cell types that appeared in culture
   - "Well": To evaluate the missing heritability of fate bias, we cultured cells in two different sets of wells after day 2. For all cells from day 2, this column will have a label of "0". For later time points, the label is either "1" or "2", corresponding to the two sets of wells. 
 
+
+#### Experiment 2: In vivo differentiation time course
+In this experiment, we isolated hematopoietic progenitor cells from mouse bone marrow, tagged them using the LARRY lentiviral barcode library, and then transplanted them into sublethally irradiated host mice. Cells were profiled on day 2 (just before transplantation) and day 9 (one week post-transplantation). See above for a detailed description of each file. 
+
+* [SPRING plot](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?cgi-bin/client_datasets/IV_all/all_combined_dubfilter)<br/>
+* [counts_matrix_in_vivo.mtx](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/counts_matrix_in_vivo.mtx.gz) / [counts_matrix_in_vivo.npz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/counts_matrix_in_vivo.npz.gz)
+* [gene_names_in_vivo.txt](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/gene_names_in_vivo.txt.gz)
+* [coordinates_in_vivo.txt](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/coordinates_in_vivo.txt.gz)
+* [clone_annotation_in_vivo.mtx](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/clone_annotation_in_vivo.mtx.gz) / [clone_annotation_in_vivo.npz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/clone_annotation_in_vivo.npz.gz)
+* [cell_metadata_in_vivo.txt](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/cell_metadata_in_vivo.txt.gz)
+
