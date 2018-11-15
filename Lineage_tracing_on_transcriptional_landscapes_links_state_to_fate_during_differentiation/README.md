@@ -8,7 +8,7 @@ In this experiment, we isolated hematopoietic progenitor cells from mouse bone m
 * [SPRING plot](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?cgi-bin/client_datasets/SF_all/all_combined)<br/>
 This links to an online user-interface where one can plot gene expression and query enriched genes. 
 
-* <a href="https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/counts_matrix_in_vitro.mtx" download>counts_matrix_in_vitro.mtx</a> / [counts_matrix_in_vitro.npz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/counts_matrix_in_vitro.npz.gz)<br/>This matrix reports the number of transcripts (UMIs) for each gene in each cell, after total-counts normalization (i.e. L1 normalization on cells). Rows represent cells and columns represent genes. There are no column or row labels. Gene names and cell metadata are provided in separate files. 
+* [counts_matrix_in_vitro.mtx.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/counts_matrix_in_vitro.mtx.gz) / [counts_matrix_in_vitro.npz.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2018/counts_matrix_in_vitro.npz.gz)<br/>This matrix reports the number of transcripts (UMIs) for each gene in each cell, after total-counts normalization (i.e. L1 normalization on cells). Rows represent cells and columns represent genes. There are no column or row labels. Gene names and cell metadata are provided in separate files. 
 
 * [gene_names_in_vitro.txt](www.google.com)<br/>List of gene symbols (one per line). The rows of this file correspond to the columns of _counts_matrix_in_vitro_ (above). 
 
