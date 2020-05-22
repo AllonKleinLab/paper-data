@@ -14,7 +14,7 @@ This links to an online user-interface where one can plot gene expression and qu
 
 * [stateFate_inVitro_clone_matrix.mtx.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_clone_matrix.mtx.gz)<br/>Binary matrix indicating the clonal membership of each cell. The rows of this file represent cells and correspond to the rows of _counts_matrix_in_vitro_ (above). The columns represent clones. Not every cell belongs to a clone. 
 
-* [stateFate_inVitro_metadata.txt.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/cell_metadata_in_vitro.txt.gz)<br/>Table of cell metadata. There is a header row followed by one row for each cell. The rows of this file (after the header) correspond to the rows of _counts_matrix_in_vitro_ (above). The headers are: 
+* [stateFate_inVitro_metadata.txt.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_metadata.txt.gz)<br/>Table of cell metadata. There is a header row followed by one row for each cell. The rows of this file (after the header) correspond to the rows of _counts_matrix_in_vitro_ (above). The headers are: 
   - "Library": The sequencing library that the cell belongs to
   - "Cell barcode": Cell barcode used for demultiplexing transcripts in inDrops
   - "Time point": The time point (in days) that the cells were profiled
