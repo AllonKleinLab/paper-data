@@ -23,6 +23,8 @@ This links to an online user-interface where one can plot gene expression and qu
   - "Well": To evaluate the missing heritability of fate bias, we cultured cells in two different sets of wells after day 2. For all cells from day 2, this column will have a label of "0". For later time points, the label is either "1" or "2", corresponding to the two sets of wells. 
   - "SPRING-x/y": Coordinates for plotting cells in SPRING
 
+* [stateFate_inVitro_neutrophil_pseudotime.txt](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_metadata.txt)<br/>Pseudotime for neutrophil trajectory cells. There is a header row followed by one row for each neutrophil trajectory cell. The first column contains a cell index (base-0 numbering) and the second column contains a pseudotime value for the cell. 
+
 
 #### Experiment 2: In vivo differentiation time course
 In this experiment, we isolated hematopoietic progenitor cells from mouse bone marrow, tagged them using the LARRY lentiviral barcode library, and then transplanted them into sublethally irradiated host mice. Cells were profiled on day 2 (just before transplantation) and days 9 and 16 (one and two weeks post-transplantation). See above for a detailed description of each file. 
