@@ -25,6 +25,9 @@ This links to an online user-interface where one can plot gene expression and qu
 
 * [stateFate_inVitro_neutrophil_pseudotime.txt.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_neutrophil_pseudotime.txt.gz)<br/>Pseudotime for neutrophil trajectory cells. There is a header row followed by one row for each neutrophil trajectory cell. The first column contains a cell index (base-0 numbering) and the second column contains a pseudotime value for the cell. 
 
+* [stateFate_inVitro_neutrophil_monocyte_trajectory.txt.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_neutrophil_monocyte_trajectory.txt.gz)<br/>List of cells belonging to the neutrophil/monocyte trajectory that were used in benchmarking analyses.
+
+
 
 #### Experiment 2: In vivo differentiation time course
 In this experiment, we isolated hematopoietic progenitor cells from mouse bone marrow, tagged them using the LARRY lentiviral barcode library, and then transplanted them into sublethally irradiated host mice. Cells were profiled on day 2 (just before transplantation) and days 9 and 16 (one and two weeks post-transplantation). See above for a detailed description of each file. 
@@ -35,7 +38,7 @@ In this experiment, we isolated hematopoietic progenitor cells from mouse bone m
 * [stateFate_inVivo_metadata.txt.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVivo_metadata.txt.gz)
 * [stateFate_inVivo_clone_matrix.mtx.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVivo_clone_matrix.mtx.gz) 
 
-#### Experiment 3: In vivo differentiation time course
+#### Experiment 3: In vitro cytokine perturbations
 In this experiment, we isolated hematopoietic progenitor cells from mouse bone marrow, tagged them using the LARRY lentiviral barcode library, and then split the clones between several cytokine conditions for ongoing culture. Cells were profiled on day 2 (just before replating) and days 4 and 6 (i.e. after 2 and 4 days of culture with alternative cytokines).
 
 * [SPRING plot](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?cgi-bin/client_datasets/CP2_FINAL/allMerged)<br/>
