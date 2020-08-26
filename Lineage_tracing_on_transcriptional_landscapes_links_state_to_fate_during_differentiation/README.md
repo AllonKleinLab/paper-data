@@ -10,7 +10,7 @@ This links to an online user-interface where one can plot gene expression and qu
 
 * [stateFate_inVitro_normed_counts.mtx.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_normed_counts.mtx.gz)<br/>This matrix reports the number of transcripts (UMIs) for each gene in each cell, after total-counts normalization (i.e. L1 normalization on cells). Rows represent cells and columns represent genes. There are no column or row labels. Gene names and cell metadata are provided in separate files. 
 
-* [stateFate_inVitro_gene_names.txt.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/gene_names_in_vitro.txt.gz)<br/>List of gene symbols (one per line). The rows of this file correspond to the columns of _counts_matrix_in_vitro_ (above). 
+* [stateFate_inVitro_gene_names.txt.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_gene_names.txt.gz)<br/>List of gene symbols (one per line). The rows of this file correspond to the columns of _counts_matrix_in_vitro_ (above). 
 
 * [stateFate_inVitro_clone_matrix.mtx.gz](https://kleintools.hms.harvard.edu/paper_websites/state_fate2020/stateFate_inVitro_clone_matrix.mtx.gz)<br/>Binary matrix indicating the clonal membership of each cell. The rows of this file represent cells and correspond to the rows of _counts_matrix_in_vitro_ (above). The columns represent clones. Not every cell belongs to a clone. 
 
