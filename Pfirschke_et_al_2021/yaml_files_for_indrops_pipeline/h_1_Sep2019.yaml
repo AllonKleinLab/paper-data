@@ -1,0 +1,42 @@
+project_name : "h_1"
+project_dir : "good/idea/to/use/scratch/directories/large/intermediate/files"
+sequencing_runs :
+
+  - name : 'h_1_1_r1'
+    version : 'v2'
+    dir : "/path/to/fastq/"
+    fastq_path : "extra_reads_mouse_h_1_1_{read}_seqrun1.fastq.gz"
+    library_name : "h_1_1"
+
+  - name : 'h_1_1_r2'
+    version : 'v2'
+    dir : "/path/to/fastq/"
+    fastq_path : "mouse_h_1_1_{read}.fastq.gz"
+    library_name : "h_1_1"
+
+  - name : 'h_1_2'
+    version : 'v2'
+    dir : "/path/to/fastq/"
+    fastq_path : "mouse_h_1_2_{read}.fastq.gz"
+    library_name : "h_1_2"
+
+paths : 
+  python_dir : "/n/data1/mgh/csb/pittet/indrops_tools/pyndrops/bin"
+  samtools_dir : "/n/data1/mgh/csb/pittet/indrops_tools/samtools/samtools-1.3.1/bin"
+  bowtie_index : "/n/data1/mgh/csb/pittet/references/mouse_mm10_91_rsem_updateJan2018/mouse.GRCm38"
+parameters : 
+  umi_quantification_arguments:
+    m : 10 #Ignore reads with more than M alignments, after filtering on distance from transcript end.
+    u : 1 #Ignore counts from UMI that should be split among more than U genes.
+    d : 600 #Maximal distance from transcript end, NOT INCLUDING THE POLYA TAIL
+    split-ambigs: False #If umi is assigned to m genes, add 1/m to each gene's count (instead of 1)
+    min_non_polyA: 15 #Require reads to align to this much non-polyA sequence. (Set to 0 to disable filtering on this parameter.)
+  output_arguments:
+    output_unaligned_reads_to_other_fastq: False
+    low_complexity_mask: False
+  bowtie_arguments:
+    m : 200
+    n : 1
+    l : 12
+    e : 70 # read length 35-36
+
