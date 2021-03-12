@@ -16,7 +16,8 @@
 
 ### Data
 
-Large data files used by the code in this repository are stored on [GEO:GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638).
+Large data files used by the code in this repository are stored on [GEO:GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638)
+
 | Description | Filename(s) | 
  ---  | --- 
 | Raw count data before filtering | <geo_sample_name_><library_name>.abundant_barcodes.tsv.gz, <geo_sample_name_><library_name>.counts.tsv.gz, <geo_sample_name_><libraray_name>.genes.txt.gz [GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638)|
