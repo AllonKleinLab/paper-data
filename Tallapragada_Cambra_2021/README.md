@@ -51,10 +51,8 @@ in this directory, together with the GEO files.
 | Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Part4_Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
 
 ### References   
-[1] To be updated after publication 
-[2] Klein, A. M., Mazutis, L., Akartuna, I., Tallapragada, N., Veres, A., Li, V., Peshkin, L., Weitz, D. A., & Kirschner, M. W. (2015). Droplet barcoding for single-cell transcriptomics applied to embryonic stem cells. Cell, 161(5), 1187–1201. https://doi.org/10.1016/j.cell.2015.04.044![image](https://user-images.githubusercontent.com/21974649/111003510-46e7fe80-8355-11eb-96f3-787582646073.png)
-[3] Weinreb, C., Wolock, S., & Klein, A. M. (2018). SPRING: a kinetic interface for visualizing high dimensional single-cell expression data. Bioinformatics (Oxford, England), 34(7), 1246–1248. [https://doi.org/10.1093/bioinformatics/btx792](https://pubmed.ncbi.nlm.nih.gov/29228172/)
-[4] Wolf, F. A., Angerer, P., & Theis, F. J. (2018). SCANPY: large-scale single-cell gene expression data analysis. Genome Biology, 19(1), 15. [https://doi.org/10.1186/s13059-017-1382-0](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0)
-[5] Wolock, S. L., Lopez, R., & Klein, A. M. (2019). Scrublet: Computational Identification of Cell Doublets in Single-Cell Transcriptomic Data. Cell systems, 8(4), 281–291.e9. [https://doi.org/10.1016/j.cels.2018.11.005](https://pubmed.ncbi.nlm.nih.gov/30954476/)
-
-
+[1] To be updated after publication <br>
+[2] Klein, A. M., Mazutis, L., Akartuna, I., Tallapragada, N., Veres, A., Li, V., Peshkin, L., Weitz, D. A., & Kirschner, M. W. (2015). Droplet barcoding for single-cell transcriptomics applied to embryonic stem cells. Cell, 161(5), 1187–1201. [https://doi.org/10.1016/j.cell.2015.04.044](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4441768/) <br>
+[3] Weinreb, C., Wolock, S., & Klein, A. M. (2018). SPRING: a kinetic interface for visualizing high dimensional single-cell expression data. Bioinformatics (Oxford, England), 34(7), 1246–1248. [https://doi.org/10.1093/bioinformatics/btx792](https://pubmed.ncbi.nlm.nih.gov/29228172/) <br>
+[4] Wolf, F. A., Angerer, P., & Theis, F. J. (2018). SCANPY: large-scale single-cell gene expression data analysis. Genome Biology, 19(1), 15. [https://doi.org/10.1186/s13059-017-1382-0](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0) <br>
+[5] Wolock, S. L., Lopez, R., & Klein, A. M. (2019). Scrublet: Computational Identification of Cell Doublets in Single-Cell Transcriptomic Data. Cell systems, 8(4), 281–291.e9. [https://doi.org/10.1016/j.cels.2018.11.005](https://pubmed.ncbi.nlm.nih.gov/30954476/) <br>
