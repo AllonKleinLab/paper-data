@@ -14,10 +14,10 @@
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ### Data
-Large data files used by the code in this repository are stored on [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638).
+Large data files used by the code in this repository are stored on [GEO:GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638).
 | Description | Filename(s) | 
  ---  | --- 
-| Raw count data before filtering | <geo_sample_name_><library_name>.abundant_barcodes.tsv.gz, <geo_sample_name_><library_name>.counts.tsv.gz, <libraray_name>.genes.tsv ([GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161771)|
+| Raw count data before filtering | <geo_sample_name_><library_name>.abundant_barcodes.tsv.gz, <geo_sample_name_><library_name>.counts.tsv.gz, <libraray_name>.genes.tsv ([GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638)|
 | Anndata objects combining all libraries from each experiment | ([GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161771) |
 | Cell annotation files (i.e. adata.obs) | sandwich_dome_metadata.xlsx and perturbations_metadata.xlsx ([here](Preprocessing_to_annotation)*) |
 | Quants metrics files (ouput indrops.py) | _sc_data/quants ([here](_sc_data/quants)*) |
