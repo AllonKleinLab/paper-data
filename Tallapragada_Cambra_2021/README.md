@@ -56,6 +56,8 @@ in this directory, together with the GEO files.
 
 #### Analyses using annotated data
 
+After cells are annotated by cell state, analyze the data for trends in gene expression and state characteristics. 
+
 | Methods | Figure panel(s) | Comment | Relevant notebooks | Contributions |
  ---  | --- | --- | --- | ---
 | Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Part2_Abundance Analyses](Abundance_analyses) | HMC
