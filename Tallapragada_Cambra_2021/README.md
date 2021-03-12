@@ -47,9 +47,8 @@ in this directory, together with the GEO files.
  ---  | --- | --- | --- | ---
 | Quality check raw data, preprocessing, visualization, and annotation | 1C, S1C, 6A, S4A | Filter data for background noise (empty droplets), filter cells and genes, exclude cells with high mitochondrial counts, ribosomal counts, and optionally ncRNA; Counts-normalizing, Logarithmizing, Z-scoring, Dimensionality Reduction (PCA); Clustering, Visualization, and Annotation | [Part1_Preprocess and Annotate Data](Preprocessing_to_annotation) | HMC
 | Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Part2_Abundance Analyses](Abundance_analyses) | HMC
-| Further Analysis: Marker gene analysis, Cell Cycle (G2) Score analysis, Gene abundance Analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, Calculate and plot G2 score | [Part3_Marker Gene and Cell Cylce Score Analysese](Marker_gene_and_cc_score_analyses) | HMC
-
-
+| Marker gene analysis, Cell Cycle (G2) Score analysis, Gene abundance Analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, Calculate and plot G2 score | [Part3_Marker Gene and Cell Cylce Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
+| Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Part4_Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
 
 ### References   
 [1] To be updated after publication  
