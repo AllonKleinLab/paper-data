@@ -18,15 +18,15 @@ Large data files used by the code in this repository are stored on [GEO](https:/
 | Description | Filename(s) | 
  ---  | --- 
 | Raw count data before filtering | <geo_sample_name_><library_name>.abundant_barcodes.tsv.gz, <geo_sample_name_><library_name>.counts.tsv.gz, <libraray_name>.genes.tsv ([GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161771)|
-| Anndata objects combining all libraries from each experiment | adata_annotated_sand_dome.h5ad, adata_merged_annotated_perturbations.h5ad |
+| Anndata objects combining all libraries from each experiment | ([GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161771) |
 | Cell annotation files (i.e. adata.obs) | sandwich_dome_metadata.xlsx and perturbations_metadata.xlsx ([here](Preprocessing_to_annotation)*) |
 | Quants metrics files (ouput indrops.py) | _sc_data/quants ([here](_sc_data/quants)*) |
 
 ### Methods
 
 #### Contributors to this repo
-Hailey M. Cambra (HMC)
-Allon M. Klein (AMK)
+Hailey M. Cambra (HMC) <br>
+Allon M. Klein (AMK) <br>
 
 #### From reads to counts
 The [indrop.py](https://github.com/indrops) pipeline was used for obtain cells x genes matrices. Yaml files detailing the parameters used can be found [here for perturbation data](Perturbation_indrops_scripts) and [here for sandwich and dome culture data](Sandwich_dome_indrops_scripts).
