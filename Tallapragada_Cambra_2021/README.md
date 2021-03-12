@@ -49,7 +49,7 @@ Scrublet (Single-Cell Remover of Doublets): https://github.com/allonkleinlab/scr
 All input files used to generate single cell RNA sequencing data analysis are provided
 in this directory, together with the GEO files. 
 
-| Methods | Figure panel(s) | Comment | Relevant notebooks | Contributions |
+| Methods | Figure panel(s) | Comment | Relevant directory | Contributions |
  ---  | --- | --- | --- | ---
 | Quality check raw data, preprocessing, visualization, and annotation | 1C, S1C, 6A, S4A | Filter data for background noise (empty droplets), filter cells and genes, exclude cells with high mitochondrial counts, ribosomal counts, and optionally ncRNA; Normalization and Dimensionality Reduction (PCA); Clustering, visualization (SPRING), and annotation | [Part1_Preprocess and Annotate Data](Preprocessing_to_annotation) | HMC
 
@@ -59,7 +59,7 @@ in this directory, together with the GEO files.
 
 After cells are annotated by cell state, analyze the data for trends in gene expression and state characteristics. 
 
-| Methods | Figure panel(s) | Comment | Relevant notebooks | Contributions |
+| Methods | Figure panel(s) | Comment | Relevant directory | Contributions |
  ---  | --- | --- | --- | ---
 | Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Part2_Abundance Analyses](Abundance_analyses) | HMC
 | Marker gene analysis, Cell cycle (G2) score analysis, Gene abundance analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, calculate and plot G2 score | [Part3_Marker Gene and Cell Cylce Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
