@@ -7,7 +7,7 @@
 - [Methods](#methods)
   * [Contributors to this repo](#contributors-to-this-repo)
   * [From reads to counts](#from-reads-to-counts)
-  * [Filtering, doublet removal, visualization and annotation](#Filtering--doublet-removal--visualization-and-annotation)
+  * [Filtering, doublet removal, visualization and annotation](#filtering--doublet-removal--visualization-and-annotation)
   * [Analyses using annotated data](#analyses-using-annotated-data)
 - [References](#references)
 - [SPRING](#SPRING-Links)
