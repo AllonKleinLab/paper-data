@@ -37,8 +37,8 @@ Notebooks are organized into directories containing required files to complete a
 
 Packages not included in the anaconda installation of python, that must be separately installed, to perform the entire analysis for the mouse intestinal organoid data (GEO:GSE164368):
 
-Scanpy (Single-Cell Analysis in Python): https://scanpy.readthedocs.io/en/stable/installation.html
-Scrublet (Single-Cell Remover of Doublets): https://github.com/allonkleinlab/scrublet
+Scanpy (Single-Cell Analysis in Python): https://scanpy.readthedocs.io/en/stable/installation.html <br>
+Scrublet (Single-Cell Remover of Doublets): https://github.com/allonkleinlab/scrublet <br>
 
 All input files used to generate single cell RNA sequencing data analysis are provided
 in this directory, together with the GEO files. 
