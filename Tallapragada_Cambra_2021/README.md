@@ -10,6 +10,7 @@
   * [Filtering, doublet removal, visualization and annotation](#filtering--doublet-removal--visualization-and-annotation)
   * [Analyses using annotated data](#analyses-using-annotated-data)
 - [References](#references)
+- [SPRING](#SPRING--Links)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
