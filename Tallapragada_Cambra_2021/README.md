@@ -9,8 +9,8 @@
   * [From reads to counts](#from-reads-to-counts)
   * [Filtering to annotation](#filtering-to-annotation)
   * [Analyses using annotated data](#analyses-using-annotated-data)
-- [References](#references)
 - [SPRING](#SPRING-Links)
+- [References](#references)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
