@@ -51,9 +51,11 @@ in this directory, together with the GEO files.
 | Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Part4_Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
 
 ### SPRING Links:
-[Inflation perturbation dataset](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_inflation_perturbation_expt/all_cells) <br>
-[Sandwich and Dome culture dataset (no stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged_no_stretch_signature/all_cells) <br>
-[Sandwich and Dome culture dataset (with stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged /all_cells) <br>
+[Inflation perturbation dataset](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_inflation_perturbation_expt/all_cells)
+
+[Sandwich and Dome culture dataset (no stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged_no_stretch_signature/all_cells)
+
+[Sandwich and Dome culture dataset (with stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged/all_cells)
 
 ### References   
 [1] To be updated after publication <br>
