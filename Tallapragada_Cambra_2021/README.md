@@ -10,7 +10,7 @@
   * [Filtering, doublet removal, visualization and annotation](#filtering--doublet-removal--visualization-and-annotation)
   * [Analyses using annotated data](#analyses-using-annotated-data)
 - [References](#references)
-- [SPRING](#SPRING--Links)
+- [SPRING](#SPRING-Links)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -51,7 +51,7 @@ in this directory, together with the GEO files.
 | Marker gene analysis, Cell cycle (G2) score analysis, Gene abundance analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, calculate and plot G2 score | [Part3_Marker Gene and Cell Cylce Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
 | Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Part4_Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
 
-### SPRING Links:
+### SPRING Links
 [Inflation perturbation dataset](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_inflation_perturbation_expt/all_cells)
 
 [Sandwich and Dome culture dataset (no stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged_no_stretch_signature/all_cells)
