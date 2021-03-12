@@ -41,7 +41,7 @@ The [indrop.py](https://github.com/indrops) pipeline was used for obtain cells x
 
 Notebooks are organized into directories containing required files to complete analyses. 
 
-Packages not included in the anaconda installation of python, that must be separately installed, to perform the entire analysis for the mouse intestinal organoid data (GEO:GSE164368):
+Packages not included in the anaconda installation of python, that must be separately installed, to perform analysis:
 
 Scanpy (Single-Cell Analysis in Python): https://scanpy.readthedocs.io/en/stable/installation.html <br>
 Scrublet (Single-Cell Remover of Doublets): https://github.com/allonkleinlab/scrublet <br>
