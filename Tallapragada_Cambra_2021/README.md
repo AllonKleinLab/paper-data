@@ -7,7 +7,7 @@
 - [Methods](#methods)
   * [Contributors to this repo](#contributors-to-this-repo)
   * [From reads to counts](#from-reads-to-counts)
-  * [Filtering, doublet removal, visualization and annotation](#filtering--doublet-removal--visualization-and-annotation)
+  * [Filtering to annotation](#filtering-to-annotation)
   * [Analyses using annotated data](#analyses-using-annotated-data)
 - [References](#references)
 - [SPRING](#SPRING-Links)
@@ -36,7 +36,7 @@ Allon M. Klein (AMK) <br>
 The [indrop.py](https://github.com/indrops) pipeline was used for obtain cells x genes matrices. Yaml files detailing the parameters used and scripts used to run the indrops.py pipeline can be found [here for perturbation data](Perturbation_indrops_scripts) and [here for sandwich and dome culture data](Sandwich_dome_indrops_scripts).
 
 
-#### Filtering, doublet removal, visualization and annotation
+#### Filtering to annotation
 
 Notebooks are organized into directories containing required files to complete analyses. 
 
@@ -51,7 +51,6 @@ in this directory, together with the GEO files.
 | Methods | Figure panel(s) | Comment | Relevant notebooks | Contributions |
  ---  | --- | --- | --- | ---
 | Quality check raw data, preprocessing, visualization, and annotation | 1C, S1C, 6A, S4A | Filter data for background noise (empty droplets), filter cells and genes, exclude cells with high mitochondrial counts, ribosomal counts, and optionally ncRNA; Normalization and Dimensionality Reduction (PCA); Clustering, visualization (SPRING), and annotation | [Part1_Preprocess and Annotate Data](Preprocessing_to_annotation) | HMC
-| Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Part2_Abundance Analyses](Abundance_analyses) | HMC
 
 
 
@@ -59,6 +58,7 @@ in this directory, together with the GEO files.
 
 | Methods | Figure panel(s) | Comment | Relevant notebooks | Contributions |
  ---  | --- | --- | --- | ---
+| Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Part2_Abundance Analyses](Abundance_analyses) | HMC
 | Marker gene analysis, Cell cycle (G2) score analysis, Gene abundance analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, calculate and plot G2 score | [Part3_Marker Gene and Cell Cylce Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
 | Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Part4_Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
 
