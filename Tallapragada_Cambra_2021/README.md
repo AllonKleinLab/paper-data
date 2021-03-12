@@ -15,6 +15,7 @@
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ### Data
+
 Large data files used by the code in this repository are stored on [GEO:GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638).
 | Description | Filename(s) | 
  ---  | --- 
@@ -26,14 +27,17 @@ Large data files used by the code in this repository are stored on [GEO:GSE16463
 ### Methods
 
 #### Contributors to this repo
+
 Hailey M. Cambra (HMC) <br>
 Allon M. Klein (AMK) <br>
 
 #### From reads to counts
+
 The [indrop.py](https://github.com/indrops) pipeline was used for obtain cells x genes matrices. Yaml files detailing the parameters used and scripts used to run the indrops.py pipeline can be found [here for perturbation data](Perturbation_indrops_scripts) and [here for sandwich and dome culture data](Sandwich_dome_indrops_scripts).
 
 
 #### Filtering, doublet removal, visualization and annotation
+
 Notebooks are organized into directories containing required files to complete analyses. 
 
 Packages not included in the anaconda installation of python, that must be separately installed, to perform the entire analysis for the mouse intestinal organoid data (GEO:GSE164368):
@@ -48,17 +52,26 @@ in this directory, together with the GEO files.
  ---  | --- | --- | --- | ---
 | Quality check raw data, preprocessing, visualization, and annotation | 1C, S1C, 6A, S4A | Filter data for background noise (empty droplets), filter cells and genes, exclude cells with high mitochondrial counts, ribosomal counts, and optionally ncRNA; Normalization and Dimensionality Reduction (PCA); Clustering, visualization (SPRING), and annotation | [Part1_Preprocess and Annotate Data](Preprocessing_to_annotation) | HMC
 | Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Part2_Abundance Analyses](Abundance_analyses) | HMC
+
+
+
+#### Analyses using annotated data
+
+| Methods | Figure panel(s) | Comment | Relevant notebooks | Contributions |
+ ---  | --- | --- | --- | ---
 | Marker gene analysis, Cell cycle (G2) score analysis, Gene abundance analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, calculate and plot G2 score | [Part3_Marker Gene and Cell Cylce Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
 | Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Part4_Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
 
 ### SPRING Links
+
 [Inflation perturbation dataset](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_inflation_perturbation_expt/all_cells)
 
 [Sandwich and Dome culture dataset (no stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged_no_stretch_signature/all_cells)
 
 [Sandwich and Dome culture dataset (with stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged/all_cells)
 
-### References   
+### References 
+
 [1] To be updated after publication <br>
 [2] Klein, A. M., Mazutis, L., Akartuna, I., Tallapragada, N., Veres, A., Li, V., Peshkin, L., Weitz, D. A., & Kirschner, M. W. (2015). Droplet barcoding for single-cell transcriptomics applied to embryonic stem cells. Cell, 161(5), 1187–1201. [https://doi.org/10.1016/j.cell.2015.04.044](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4441768/) <br>
 [3] Weinreb, C., Wolock, S., & Klein, A. M. (2018). SPRING: a kinetic interface for visualizing high dimensional single-cell expression data. Bioinformatics (Oxford, England), 34(7), 1246–1248. [https://doi.org/10.1093/bioinformatics/btx792](https://pubmed.ncbi.nlm.nih.gov/29228172/) <br>
