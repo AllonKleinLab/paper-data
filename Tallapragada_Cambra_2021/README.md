@@ -18,7 +18,7 @@ Large data files used by the code in this repository are stored on [GEO:GSE16463
 | Description | Filename(s) | 
  ---  | --- 
 | Raw count data before filtering | <geo_sample_name_><library_name>.abundant_barcodes.tsv.gz, <geo_sample_name_><library_name>.counts.tsv.gz, <geo_sample_name_><libraray_name>.genes.txt.gz [GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638)|
-| Anndata objects combining all libraries from each experiment | [GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161771) |
+| Anndata objects combining all libraries from each experiment | GSE164638_adata_mg_annotated_merged_coarse_grain_no_ss_12092020.h5ad.gz (Sandwich and Dome data as in publication); GSE164638_adata_perturbations_merged_annotated_cg_122220.h5ad.gz (perturbation data) [GSE164638](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164638) |
 | Cell annotation files (i.e. adata.obs) | sandwich_dome_metadata.xlsx and perturbations_metadata.xlsx ([here](Preprocessing_to_annotation)*) |
 | Quants metrics files (ouput indrops.py) | _sc_data/quants ([here](_sc_data/quants)*) |
 
@@ -49,6 +49,11 @@ in this directory, together with the GEO files.
 | Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Part2_Abundance Analyses](Abundance_analyses) | HMC
 | Marker gene analysis, Cell cycle (G2) score analysis, Gene abundance analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, calculate and plot G2 score | [Part3_Marker Gene and Cell Cylce Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
 | Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Part4_Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
+
+### SPRING Links:
+[Inflation perturbation dataset](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_inflation_perturbation_expt/all_cells) <br>
+[Sandwich and Dome culture dataset (no stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged_no_stretch_signature/all_cells) <br>
+[Sandwich and Dome culture dataset (with stretch signature annotation)](https://kleintools.hms.harvard.edu/tools/springViewer_1_6_dev.html?datasets/SPRING_private/mouse_intestinal_organoids_21/murine_intestinal_organoid_sandwich_dome_culture_merged /all_cells) <br>
 
 ### References   
 [1] To be updated after publication <br>
