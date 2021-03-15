@@ -62,7 +62,7 @@ After cells are annotated by cell state, analyze the data for trends in gene exp
 | Methods | Figure panel(s) | Comment | Relevant directory | Contributions |
  ---  | --- | --- | --- | ---
 | Calculate and compare abundances of annotated states | 1D, 6B, S4B | Calculate abundances for each cell state; Compare abundances between treatment conditions | [Abundance Analyses](Abundance_analyses) | HMC
-| Marker gene analysis, Cell cycle (G2) score analysis, Gene abundance analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, calculate and plot G2 score | [Marker Gene and Cell Cylce Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
+| Marker gene analysis, Cell cycle (G2) score analysis, Gene abundance analysis  | S1D, 6C, 6E, 6F, S4C | Compare marker genes across states, compare gene expression between treatment conditions, calculate and plot G2 score | [Marker Gene and Cell Cycle Score Analyses](Marker_gene_and_cc_score_analyses) | HMC, AMK
 | Gene set enrichment analysis  | 6I | Compare genes enriched in stretch response state to similar cell states reported in literature | [Gene Set Enrichment Analysis](Gene_set_enrichment_analysis) | HMC, AMK
 
 ### SPRING Links
