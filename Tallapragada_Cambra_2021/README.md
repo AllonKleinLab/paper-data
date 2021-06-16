@@ -75,7 +75,8 @@ After cells are annotated by cell state, analyze the data for trends in gene exp
 
 ### References 
 
-[1] To be updated after publication <br>
+[1] Tallapragada, N. P., Cambra, H. M., Wald, T., Keough Jalbert, S., Abraham, D. M., Klein, O. D., & Klein, A. M. (2021). 
+Inflation-collapse dynamics drive patterning and morphogenesis in intestinal organoids. Cell Stem Cell, [https://doi.org/10.1016/J.STEM.2021.04.002](https://pubmed.ncbi.nlm.nih.gov/33915079/) <br>
 [2] Klein, A. M., Mazutis, L., Akartuna, I., Tallapragada, N., Veres, A., Li, V., Peshkin, L., Weitz, D. A., & Kirschner, M. W. (2015). Droplet barcoding for single-cell transcriptomics applied to embryonic stem cells. Cell, 161(5), 1187–1201. [https://doi.org/10.1016/j.cell.2015.04.044](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4441768/) <br>
 [3] Weinreb, C., Wolock, S., & Klein, A. M. (2018). SPRING: a kinetic interface for visualizing high dimensional single-cell expression data. Bioinformatics (Oxford, England), 34(7), 1246–1248. [https://doi.org/10.1093/bioinformatics/btx792](https://pubmed.ncbi.nlm.nih.gov/29228172/) <br>
 [4] Wolf, F. A., Angerer, P., & Theis, F. J. (2018). SCANPY: large-scale single-cell gene expression data analysis. Genome Biology, 19(1), 15. [https://doi.org/10.1186/s13059-017-1382-0](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0) <br>
