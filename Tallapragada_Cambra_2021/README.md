@@ -1,6 +1,6 @@
 
 
-# ScRNAseq-related analyses for Tallapragada/Cambra et al., 2021[1]
+# ScRNAseq-related analyses for Tallapragada, Cambra et al., 2021
 
 ### Table of contents
 - [Data](#data)
