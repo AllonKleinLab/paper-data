@@ -37,7 +37,7 @@ Allon M. Klein (AMK) <br>
 
 [See our publication on the method used in the paper in Current Protocols [6]](https://pubmed.ncbi.nlm.nih.gov/35030297/). Recently, we've been having a lot of trouble with the sandwich cultures lifting off of the coverslip. This could be for a number of reasons, but we've found that the PolyHEMA is the common denominator in the lifing we have observed. One way to get around this is to use [Aquapel](http://www.aquapel.com/) instead. This is a reagent that is routinely used to coat the microchips used in our inDrops protocol, and the use in that protocol inspired us to try this reagent as a replacement for PolyHEMA. It is a rain-repellant used on windshields, and is quite inexpensive. The trade-off to using this versus the PolyHEMA is that it can be more difficult to evenly spread, which can result in monolayer formation when the organoids eventually touch the coverslip. To achieve full coating of the surface area, you will need to repeat the coating process multiple times. We have grown organoids in sandwich cultures with Aquapel coating and not observed any differences in growth. In the future, we will aim to publish this protocol more widely in one form or another, but for now, we're sharing this for those of you running into the same issue. The protocol for obtaining Aquapel from it's container (be careful!), and it's application to glass coverslips is as follows: <br>
 
-You will need: <br>
+Reagents and Materials: <br>
 * Double gloves <br>
 * A chemical hood with sash (protect your eyes with glasswear to be extra cautious) <br>
 * A glass syringe or other glass container without excess air for Aquapel <br>
@@ -50,7 +50,9 @@ You will need: <br>
 * Sterile hood for applying to glass coverslips <br>
 * Vacuum desiccator <br>
 * Parafilm <br>
+* Aquapel <br>
 
+Protocol: <br>
 1. Make your own dish-friendly applicator by cutting a piece of the applicator fabric and stuffing into the back of a 200 µL pipette tip. <br>
 2. To get to the glass capsule inside, very carefully cut open the fabric applicator on the outside with one long cut down the middle, to release the capsule. Do not leave the Aquapel in plastic containers (including falcon tubes, etc.) for long periods of time, and do not allow prolonged exposure to the air. <br>
 3. Prepare the syringe by adding the 0.2 µm PTE syringe filter onto the opening. <br>
