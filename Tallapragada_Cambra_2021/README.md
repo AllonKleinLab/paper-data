@@ -52,7 +52,7 @@ Reagents and Materials: <br>
 * Parafilm <br>
 * Aquapel <br>
 
-**Use full PPE during this protocol! Glasses, lab coat, and break the glass capsule inside the chemical fume hood in step 4!
+**Use full PPE during this protocol! Glasses, lab coat, and break the glass capsule inside the chemical fume hood in step 4!**
 
 Protocol: <br>
 1. Make your own dish-friendly applicator by cutting a piece of the applicator fabric and stuffing into the back of a 200 µL pipette tip. <br>
