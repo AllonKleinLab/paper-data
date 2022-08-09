@@ -39,11 +39,11 @@ Allon M. Klein (AMK) <br>
 
 You will need: <br>
 * Double gloves <br>
-* A chemical hood with sash (protect your eyes with glasswear to be extra cautious). <br>
-* A glass syringe or other glass container without excess air for Aquapel. <br>
-* Glass bottom dish or coverslip to be coated. <br>
-* A 15 mL falcon tube for breaking open the capsule. <br> 
-* 0.2 µm PTFE syringe filter to fit onto the syringe. <br> 
+* A chemical hood with sash (protect your eyes with glasswear to be extra cautious) <br>
+* A glass syringe or other glass container without excess air for Aquapel <br>
+* Glass bottom dish or coverslip to be coated <br>
+* A 15 mL falcon tube for breaking open the capsule <br> 
+* 0.2 µm PTFE syringe filter to fit onto the syringe <br> 
 * 1 mL pipette and pipette tips <br>
 * 25 G 5/8" needle <br>
 * 0.015" I.D. x 0.043" O.D. 95 Durometer LDPE Micro Medical Tubing <br>
