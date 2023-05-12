@@ -1,8 +1,12 @@
 ### This repository holds the code for the analysis of the single-cell data collected in:
 O'Brown et. al. The secreted neuronal signal Spock1 regulates the blood-brain barrier (2023)
 
+<br>
+
 ### The annotated counts matrix (GSM7208220_210902_PATBROWN_final.h5ad) can be found here:
 https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM7208220
+
+<br>
 
 ### Description of the Jupyter notebooks:
 - STEP1_Filter_Dataset.ipynb: Annotation of the full single-cell dataset for both the WT and hm41 mutant genotypes. Filter out non-neuronal cell types.
