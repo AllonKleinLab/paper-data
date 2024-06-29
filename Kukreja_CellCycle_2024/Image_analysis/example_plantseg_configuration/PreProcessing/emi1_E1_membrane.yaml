@@ -1,0 +1,35 @@
+algorithm: DataPreProcessing3D
+crop: '[:, :, :]'
+factor:
+- 1.0
+- 1.0
+- 1.0
+file_suffix: ''
+filter: !!python/name:plantseg.dataprocessing.dataprocessing._no_filter ''
+filter_param: 0
+h5_output_key: raw
+input_channel: null
+input_key: null
+input_paths:
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\HUA_E1_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\HUA_E3_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\HUA_E4_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\HUA_E5_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\HUA_E6_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\WT_E1_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\WT_E2_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\WT_E3_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\WT_E4_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\emi1_E1_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\emi1_E2_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\emi1_E3_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\emi1_E4_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\emi1_E5_membrane.tif
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\emi1_E6_membrane.tif
+input_type: data_float32
+order: 2
+out_ext: .h5
+output_type: data_uint8
+save_directory: E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch\PreProcessing
+save_raw: false
+state: true

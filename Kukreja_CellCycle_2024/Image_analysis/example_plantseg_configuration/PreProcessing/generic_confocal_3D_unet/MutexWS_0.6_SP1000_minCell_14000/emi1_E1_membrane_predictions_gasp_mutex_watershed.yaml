@@ -1,0 +1,49 @@
+algorithm: GaspFromPmaps
+beta: 0.6
+dt_watershed: !!python/object/apply:functools.partial
+  args:
+  - &id001 !!python/name:plantseg.segmentation.functional.segmentation.dt_watershed ''
+  state: !!python/tuple
+  - *id001
+  - !!python/tuple []
+  - min_size: 1000
+    n_threads: 6
+    sigma_seeds: 2.0
+    sigma_weights: 0.0
+    stacked: false
+    threshold: 0.5
+  - null
+file_suffix: _gasp_mutex_watershed
+gasp_linkage_criteria: mutex_watershed
+h5_output_key: segmentation
+input_channel: null
+input_key: null
+input_paths:
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\HUA_E1_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\HUA_E3_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\HUA_E4_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\HUA_E5_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\HUA_E6_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\WT_E1_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\WT_E2_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\WT_E3_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\WT_E4_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\emi1_E1_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\emi1_E2_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\emi1_E3_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\emi1_E4_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\emi1_E5_membrane_predictions.h5
+- E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\emi1_E6_membrane_predictions.h5
+input_type: data_float32
+n_threads: 6
+out_ext: .h5
+output_type: labels
+post_minsize: 14000
+run_ws: true
+save_directory: E:/Documents/Cohen Lab/Papers/Kalki_CellCycle/20240116_phalloidin_head_volume_measurement/PlantSeg_Batch/PreProcessing/generic_confocal_3D_unet\MutexWS_0.6_SP1000_minCell_14000
+save_raw: false
+state: true
+ws_2d: false
+ws_minsize: 1000
+ws_sigma: 2.0
+ws_threshold: 0.5
