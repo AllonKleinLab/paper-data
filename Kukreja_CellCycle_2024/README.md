@@ -1,8 +1,9 @@
-This directory contains codes for data analyses in Kukreja et. al. 2024 Nature Cell Biology manuscript.
+This directory contains codes for data analyses in Kukreja et. al. 2024 Cell cycle manuscript. ([Link to preprint](https://doi.org/10.1101/2023.07.29.551123))
 
 There are two folders: scRNA-seq_data_analysis and Image_analysis
 
-<b> scRNA-seq_data_analysis folder contains: <\b>
+### **scRNA-seq_data_analysis**:
+This folder contains:
 
 - cell_cycle_env.yml: This is the conda environment used to run python jupyter notebooks for scRNA-seq data analysis.
 - pip_packages_list.txt: List of packages installed obtainied using the command pip list.
@@ -25,7 +26,9 @@ There are two folders: scRNA-seq_data_analysis and Image_analysis
 	- 15.FinalTricycleAnalysis.R: R script used for calculating cell cycle phase angle.  
 - processing_raw_reads: contains scripts for getting counts data from raw fastq reads. the pipeline used can be found here: https://github.com/AllonKleinLab/klunctions/tree/master/sam/inDrops_pipeline
 
-<b> Image_analysis folder: <\b>
+### **Image_analysis folder**:
+This folder contains:
+
 - Notebooks:
 	- 20231214_z20c_Voltron_GCaMP_Heartbeat_Plotting.ipynb: used for analysis of cardiac calcium imaging data.
 	- 20240116_phalloidin_head_volume_measurement.ipynb: used for analysis of cell size vs tissue size for embryo head (Fig. 5).
