@@ -1,4 +1,4 @@
-This directory contains codes for data analyses in Kukreja et. al. 2024 Cell cycle manuscript. ([Link to preprint](https://doi.org/10.1101/2023.07.29.551123))
+This directory contains codes for data analyses in Kukreja et. al. 2024 Nature Cell Biology manuscript ([Link to preprint](https://doi.org/10.1101/2023.07.29.551123))
 
 There are two folders: scRNA-seq_data_analysis and Image_analysis
 
@@ -25,6 +25,8 @@ This folder contains:
 	- 14.proliferation_score_tree.ipynb: used for calculating proliferation scores and generating Fig. 5g.
 	- 15.FinalTricycleAnalysis.R: R script used for calculating cell cycle phase angle.  
 - processing_raw_reads: contains scripts for getting counts data from raw fastq reads. the pipeline used can be found here: https://github.com/AllonKleinLab/klunctions/tree/master/sam/inDrops_pipeline
+	- 16.correlation_analyses_FC_abundance_v1_kk.ipynb: For correlation analyses in Extended Data figures 10c-e
+	- 17.correlation_analyses_all_vs_cc_v1.ipynb: For correlation analyses in Extended Data figures 10f,g
 
 ### **Image_analysis folder**:
 This folder contains:

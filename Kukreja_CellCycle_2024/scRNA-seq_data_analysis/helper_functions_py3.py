@@ -1243,11 +1243,11 @@ def multi_class_svm(train_x, train_y, test_x, C_param=1,n_iterations = 1000):
 
     raise NotImplementedError
 
-def softmax_regression(train_x, train_y, test_x,  c_param=1, n_iterations=1000, seed=0):
+def softmax_regression(train_x, train_y, test_x,  c_param=1, n_iterations=1000):
 
     from sklearn.linear_model import LogisticRegression
 
-    lr = LogisticRegression(C=c_param, max_iter = n_iterations, random_state=seed)
+    lr = LogisticRegression(C=c_param, max_iter = n_iterations)
     lr.fit(train_x, train_y)
     return lr.predict(test_x)
 
@@ -1423,7 +1423,7 @@ def classifier_pca_2022(adata_ref, ref_states, adata_query, classifier, counts_p
     return state_query
 
 def classifier_pca(adata_ref, ref_states, adata_query, classifier, unimportant_genes, counts_per_cell = 10000, 
-    remove_unimportant_genes=True, ncomponents=50, n_iterations=1000, seed=0, **args):
+    remove_unimportant_genes=True, ncomponents=50, n_iterations=1000, **args):
     '''
     input arguments:
     ----------------
@@ -1499,7 +1499,7 @@ def classifier_pca(adata_ref, ref_states, adata_query, classifier, unimportant_g
     pca_ref = pca.transform(Z_ref) # tranform reference data on the new coordinates
     pca_query = pca.transform(Z_test) # transform query data on the new coordinates
 
-    state_query = classifier(pca_ref, ref_states, pca_query, n_iterations, seed)
+    state_query = classifier(pca_ref, ref_states, pca_query, n_iterations)
     
     return state_query
 
