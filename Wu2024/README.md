@@ -1,0 +1,1 @@
+This repository contains code and relevant auxiliary files for the paper "IL-17A primes an early progenitor compartment to tune the erythropoietic feedback circuit" by Qiu Chang Wu, Aishwarya Swaminathan, Ashley Winward, Logan Lalonde, Yung Hwang, Noah Littman, Merav Socolovsky, and Allon Moshe Klein
