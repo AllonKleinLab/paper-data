@@ -1,12 +1,12 @@
 This folder contains auxillary code for the preprint: [insert citation]
 
 ## Data Availability
-scRNA-seq data of _C. robusta_ blood can be viewed interactively and downloaded from [https://kleintools.hms.harvard.edu/paper_websites/scully_ciona_robusta_blood/](https://kleintools.hms.harvard.edu/paper_websites/scully_ciona_robusta_blood/). Downloads are also available from the Gene Expression Omnibus (GEO) repository: Series GSExxxxx (full processed data and May 2023 libraries), and Sample GSM8869531 from Series [GSE292926](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE292926) (April 2023 library).
+scRNA-seq data of _C. robusta_ blood can be viewed interactively and downloaded from [https://kleintools.hms.harvard.edu/paper_websites/scully_ciona_robusta_blood/](https://kleintools.hms.harvard.edu/paper_websites/scully_ciona_robusta_blood/). Downloads are also available from the Gene Expression Omnibus (GEO) repository: Series [GSE296253](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE296253) (full processed data and May 2023 libraries), and Sample GSM8869531 from Series [GSE292926](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE292926) (April 2023 library).
 
 ## Code in This Directory
 
-Mentioned in methods sections:
-- GS Plots
+### Subfolder `helper_functions/`
+Contains several helper function files used in scripts throughout the folder.
 
 ### Subfolder `scRNA-seq_preprocessing/`
 - `genotype_demultiplexing/` contains scripts for carrying out SNP demultiplexing, including generation of plots shown in Supplementary Fig. 1.
