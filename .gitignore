@@ -1,5 +1,6 @@
-# To do later - need to first delete all .DS_Store files in the whole repo. Then can uncomment this line to make it so none are added again.
-# **/.DS_Store
+**/.DS_Store
+__pycache__/
+ *.pyc
 
 Scully_Ciona_blood_2025/data/*
 !Scully_Ciona_blood_2025/data/README.md
