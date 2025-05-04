@@ -1,0 +1,6 @@
+# To do later - need to first delete all .DS_Store files in the whole repo. Then can uncomment this line to make it so none are added again.
+# **/.DS_Store
+
+Scully_Ciona_blood_2025/data/*
+!Scully_Ciona_blood_2025/data/README.md
+Scully_Ciona_blood_2025/scRNA-seq_analysis/go_enrichment_analysis/go_enrichment_analysis_output
