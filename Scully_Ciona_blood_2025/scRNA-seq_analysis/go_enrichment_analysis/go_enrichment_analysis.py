@@ -11,8 +11,8 @@ from statsmodels.stats.multitest import fdrcorrection
 from tqdm import tqdm
 
 # Change this path to point to folder containing helper functions scripts
-path_to_repo_folder = '/Users/tds12/Github/paper-data/Scully_Ciona_blood_2025/'
-sys.path.append(path_to_repo_folder + 'helper_functions/')
+path_to_repo_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.join(path_to_repo_dir, 'helper_functions'))
 import scrna_helper_functions as hf
 
 # ============================================================================
@@ -97,7 +97,8 @@ def reorder_matrix(centr, row_order='none',
 adata = sc.read_h5ad(hf.path.Crob_adata_file)
 
 # Set up output folder
-out_path = 'go_enrichment_analysis_output/'
+out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        'go_enrichment_analysis_output')
 if not os.path.exists(out_path): os.mkdir(out_path)
 
 # ============================================================================
@@ -149,7 +150,8 @@ for go_gene_sets in ['GO_Molecular_Function_2023', 'GO_Biological_Process_2023',
     # HYPERGEOMETRIC TEST / FISHER'S EXACT TEST
 
     try:
-        fisher_results = pd.read_csv(out_path + 'fisher_results.tsv', sep='\t')
+        fisher_results = pd.read_csv(os.path.join(out_path, 'fisher_results.tsv'),
+                                     sep='\t')
         fisher_results['Cell type'] = fisher_results['Cell type'].astype('category')
         fisher_results['GO term'] = fisher_results['GO term'].astype('category')
 
@@ -241,5 +243,5 @@ for go_gene_sets in ['GO_Molecular_Function_2023', 'GO_Biological_Process_2023',
 
         # Save results
         fisher_results[fisher_results['null rejected']].to_csv(
-            out_path + f'{go_gene_sets}_fisher_results.tsv', sep='\t'
+            os.path.join(out_path, f'{go_gene_sets}_fisher_results.tsv'), sep='\t'
         )

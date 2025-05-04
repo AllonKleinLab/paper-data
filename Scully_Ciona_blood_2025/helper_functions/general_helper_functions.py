@@ -7,32 +7,37 @@ from zipfile import ZipFile
 from types import SimpleNamespace
 from scipy.cluster.hierarchy import dendrogram, linkage
 
-path_to_dropbox = os.environ['PATH_TO_DROPBOX']
-path_to_repo_folder = '/Users/tds12/Github/paper-data/Scully_Ciona_blood_2025/'
-
 # ============================================================================
 # Paths to data and useful folders
 
 path = SimpleNamespace()
 
-# !! Path to C. robusta blood dataset, downloadable from GEO:
+path.repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# !! FIRST MAKE SURE TO DOWNLOAD C. ROBUSTA DATA INTO THE RIGHT SUBFOLDER
+# See data/README.md
+# Path to C. robusta blood dataset, downloadable from GEO:
 # https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE296253
 # GSE296253_combined_processed_data.h5ad
-path.Crob_adata_file = (path_to_dropbox + 'klein_lab/evolution/ciona/'
-                        + 'sc_analysis/000_processing/batch_correction_output/'
-                        + 'library_no_doublet_cluster/adata_bbknn_annotated.h5ad')
+path.Crob_adata_file = os.path.join(
+    path.repo_dir,
+    'data',
+    'GSE296253_combined_processed_data.h5ad'
+)
 
 # External datasets
-path.external_datasets = (path_to_dropbox
-                          + 'klein_lab/evolution/other_species/')
+path.external_datasets = os.path.join(
+    path.repo_dir,
+    'data',
+)
 
 # ============================================================================
 # Gene homology and annotations
 
-path_to_dict = (path_to_repo_folder + 'helper_functions/gene_dictionaries/')
+path_to_dict = os.path.join(path.repo_dir, 'helper_functions', 'gene_dictionaries')
 
 # Use gene homology determined by OrthoFinder
-with open(path_to_dict + 'crob2hsap.pickle', 'rb') as fp:
+with open(os.path.join(path_to_dict, 'crob2hsap.pickle'), 'rb') as fp:
     ciona2human = pickle.load(fp)
     human2ciona = pickle.load(fp)
 # with open(path_to_dict + 'hsap2drer.pickle', 'rb') as fp:
@@ -40,7 +45,7 @@ with open(path_to_dict + 'crob2hsap.pickle', 'rb') as fp:
 #     human2ciona = pickle.load(fp)
 
 # TF gene names
-with open(path_to_dict + 'tf_dict.pickle','rb') as fp:
+with open(os.path.join(path_to_dict, 'tf_dict.pickle'),'rb') as fp:
     tf_dict = pickle.load(fp)
 
 # ============================================================================
