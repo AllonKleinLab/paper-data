@@ -6,13 +6,13 @@ import scanpy as sc
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tqdm import tqdm
-from gs_plot_helper_functions import *
 from itertools import combinations
 
 # Change this path to point to folder containing helper functions scripts
 path_to_repo_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.join(path_to_repo_dir, 'helper_functions'))
 import scrna_helper_functions as hf
+from gs_plot_helper_functions import *
 
 # Plot style
 plt.style.use('tal_paper')
@@ -21,7 +21,7 @@ plt.style.use('tal_paper')
 # OUTPUT PATH
 
 out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                        'gs_plots_Hs_vs_Cr')
+                        'gs_plots_Hs_vs_Cr_output')
 if not os.path.exists(out_path): os.mkdir(out_path)
 
 # ============================================================================
@@ -42,8 +42,8 @@ adata_cr = sc.read_h5ad(hf.path.Crob_adata_file)
 # ------------------------------------
 # Human dataset
 
-data_path = f'{hf.path.external_datasets}Tabula_sapiens/data/'
-adata_hs = sc.read_h5ad(data_path + 'blood_combined_for_SAMap_combined_cell_types.h5ad')
+adata_hs = sc.read_h5ad(os.path.join(hf.path.external_datasets,
+                                     'Hs_Tabula_Sapiens_blood_bone_marrow.h5ad'))
 
 # Save a copy of raw (unnormalized data)
 adata_hs.layers['raw_unnorm_expression'] = adata_hs.X
@@ -62,57 +62,39 @@ sc.pp.log1p(adata_hs, base=10)
 adata_hs.raw = adata_hs
 
 # ============================================================================
-# Import list of human TFs from Lambert et al. 2018
-# https://www.cell.com/cell/fulltext/S0092-8674(18)30106-5
-path_to_tf_list = hf.path.resources + 'human_TF_list_lambert_et_al_2018/'
-tf_df = pd.read_csv(path_to_tf_list + 'tf_table_S1.csv',
-                    usecols=['Name', 'Is TF?', 'TF assessment'])
-tf_df['TF_bool'] = ((tf_df['TF assessment'] == 'Known motif')
-                    + (tf_df['TF assessment'] == 'Inferred motif'))
-
-hs_tf_list = []
-for g in list(tf_df.loc[tf_df['TF_bool'], 'Name']):
-    if g in adata_hs.var.index: hs_tf_list.append(g)
-
-# ============================================================================
 # DEGs for each species
 
 print(f'DEGs for {species1.name}')
 sc.tl.rank_genes_groups(adata_cr, groupby='cell_type', method='wilcoxon')
-degs_cr = {}; degs_cr_tf = {}
-for cell_type in tqdm(adata_cr.obs['cell_type'].cat.categories):
+degs_cr = {}
+for cell_type in adata_cr.obs['cell_type'].cat.categories:
     df = sc.get.rank_genes_groups_df(adata_cr, cell_type)
     these_genes = set(df['names'][(df['logfoldchanges'] > 2)
                                   * (df['pvals_adj'] < 0.05)])
     degs_cr[cell_type] = these_genes
-    degs_cr_tf[cell_type] = [g for g in these_genes if g in hf.tf_dict]
 
 print(f'DEGs for {species2.name}')
 sc.tl.rank_genes_groups(adata_hs, groupby='cell_type_coarse',
                         method='wilcoxon')
-degs_hs = {}; degs_hs_tf = {}
-for cell_type in tqdm(adata_hs.obs['cell_type_coarse'].cat.categories):
+degs_hs = {}
+for cell_type in adata_hs.obs['cell_type_coarse'].cat.categories:
     df = sc.get.rank_genes_groups_df(adata_hs, cell_type)
     these_genes = set(df['names'][(df['logfoldchanges'] > 2)
                                   * (df['pvals_adj'] < 0.05)])
     degs_hs[cell_type] = these_genes
-    degs_hs_tf[cell_type] = [g for g in these_genes if g in hs_tf_list]
 
 # ============================================================================
-# GENE HOMOLOGY
+# GENE HOMOLOGY FOR HUMAN VS. CIONA
 
 cr_gene_list = adata_cr.var.index
 hs_gene_list = adata_hs.var.index
 
 print('\nGetting OrthoFinder orthologs for all gene pairs...')
 orthofinder_all = []
-orthofinder_tf = []
 for cr_gene in hf.ciona2human:
     for hs_gene in hf.ciona2human[cr_gene]:
         if (cr_gene in cr_gene_list) and (hs_gene in hs_gene_list):
             orthofinder_all.append([cr_gene, hs_gene, 1])
-            if cr_gene in hf.tf_dict:
-                orthofinder_tf.append([cr_gene, hs_gene, 1])
 
 # ============================================================================
 # Functions for getting numbers needed for modified Sankey plots
@@ -120,15 +102,26 @@ for cr_gene in hf.ciona2human:
 
 def get_gene_subsets(gene_sets):
     """
-    Given a dictionary of gene sets, returns a dictionary where keys are
-    tuples representing the gene list combinations, and values are sets of
-    genes in those combinations.
+    Given a dictionary of gene sets per cell state, returns a dictionary 
+    giving the set of genes in each combination. For example, for 3 cell
+    states, gives the set of genes which are:
+    - only in state1
+    - only in state2
+    - only in state3
+    - in state1 and state2, but not state3
+    - in state2 and state2, but not state1
+    - in state1 and state3, but not state2
+    - in all 3 of state1, state2, and state3
+    This is used for determining how much ribbons in GS plots should overlap.
 
-    Parameters
-    gene_sets : dict -> {"ciona1": set1, "ciona2": set2, ...}
-
-    Returns
-    subsets : 
+    Args:   
+        gene_sets (dict) : {"ciona1": set1, "ciona2": set2, "ciona3": set3, ...}
+    
+    Returns:
+        subsets (dict) : Keys are tuples of cell states, e.g. ('state1',) for
+            genes only in state1, or ('state2', 'state3') for genes in state2
+            and state3 but not state1. Values are sets, listing the genes
+            corresponding to each state combination.
     """
     subsets = {}
 
@@ -152,8 +145,32 @@ def get_gene_subsets(gene_sets):
     return subsets
 
 
-def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, tf_bool:bool,
-                       sp1='human', th_orthology=None, gene_orthology='samap'):
+def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, sp1='human',
+                       gene_orthology='orthofinder'):
+    """
+    Given the names of cell states to compare, get dictionaries containing
+    shared genes (i.e. genes which have a homolog in the DEGs of the other
+    species's cell types' DEGs)
+    
+    Args:
+        sp1_cell (str) : The name of the single species1 cell state, i.e.
+            the top rectangle in the GS plot.
+        sp2_cell_list (str) : The names of the species 2 cell states, i.e.
+            the bottom rectangles in teh GS plot.
+        sp1 (str) : The name of the species whose cell state is on top,
+            either 'human' or something else.
+        gene_orthology (str) : The type of gene homology to use. We only
+            use OrthoFinder (gene_orthology='orthofinder') in this script.
+    
+    Returns:
+        hs_genes_dict (dict) : Keys are human cell state names, values are
+            dictionaries with the following keys:
+            - 'all' contains the set of enriched DEGs in this human cell state
+            - 'shared_w_{xx}' contains the set of enriched DEGs which have a 
+              homolog in the DEGs of the other species's cell state {xx}
+        cr_genes_dict (dict) : Same set-up as hs_genes_dict, but with the
+            species swapped.
+    """
     # Initialize dictionaries
     if sp1 == 'human':
         hs_genes_dict = {sp1_cell: {}}
@@ -164,20 +181,17 @@ def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, tf_bool:bool,
 
     # Determine orthology type
     if gene_orthology == 'orthofinder':
-        if tf_bool: orthology_pairs = orthofinder_tf
-        else: orthology_pairs = orthofinder_all
-        th_orthology = 0
+        orthology_pairs = orthofinder_all
 
     # Orthology dicts
     cr2hs = {}; hs2cr = {}
-    for dr_g, hs_g, corr in orthology_pairs:
-        if corr > th_orthology:
-            # Dr to Hs conversion
-            if dr_g not in cr2hs: cr2hs[dr_g] = [hs_g]
-            else: cr2hs[dr_g].append(hs_g)
-            # Hs to Dr conversion
-            if hs_g not in hs2cr: hs2cr[hs_g] = [dr_g]
-            else: hs2cr[hs_g].append(dr_g)
+    for dr_g, hs_g, _ in orthology_pairs:
+        # Dr to Hs conversion
+        if dr_g not in cr2hs: cr2hs[dr_g] = [hs_g]
+        else: cr2hs[dr_g].append(hs_g)
+        # Hs to Dr conversion
+        if hs_g not in hs2cr: hs2cr[hs_g] = [dr_g]
+        else: hs2cr[hs_g].append(dr_g)
 
     for cr_cell in cr_genes_dict:
         for hs_cell in hs_genes_dict:
@@ -194,16 +208,16 @@ def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, tf_bool:bool,
             #     (x >= th).values * (y >= th).values * (w > th_orthology)].index.unique()
             # genes_hs_with_enriched_ortholog = y[
             #     (x >= th).values * (y >= th).values * (w > th_orthology)].index.unique()
-            enriched_genes_dr = set([g for g in degs_cr[cr_cell] if g in cr2hs])
+            enriched_genes_cr = set([g for g in degs_cr[cr_cell] if g in cr2hs])
             enriched_genes_hs = set([g for g in degs_hs[hs_cell] if g in hs2cr])
             genes_dr_w_enriched_ortholog = [
-                g for g in enriched_genes_dr
+                g for g in enriched_genes_cr
                 if len(set(cr2hs[g]).intersection(enriched_genes_hs)) > 0]
             genes_hs_w_enriched_ortholog = [
                 g for g in enriched_genes_hs
-                if len(set(hs2cr[g]).intersection(enriched_genes_dr)) > 0]
+                if len(set(hs2cr[g]).intersection(enriched_genes_cr)) > 0]
 
-            cr_genes_dict[cr_cell]['all'] = enriched_genes_dr
+            cr_genes_dict[cr_cell]['all'] = enriched_genes_cr
             hs_genes_dict[hs_cell]['all'] = enriched_genes_hs
             cr_genes_dict[cr_cell][f'shared_w_{hs_cell}'] = set(
                 genes_dr_w_enriched_ortholog)
@@ -214,6 +228,24 @@ def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, tf_bool:bool,
 
 
 def get_sankey_plot_numbers(sp1_genes_dict, sp2_genes_dict):
+    """
+    Takes the gene dicts outputted by get_gene_dict_sets() and outputs the
+    numbers in the format needed to make a GS plot.
+
+    Args:
+        sp1_genes_dict (dict) : Output of get_gene_dict_sets for whichever
+            species has a single cell state (will become the top rectangle)
+        sp2_genes_dict (dict) : Output of get_gene_dict_sets for whichever
+            species has multiple cell states (will become the bottom
+            rectangles)
+    
+    Returns:
+        sp1_rect_dicts (dict) : Dictionary indicating the number of DEGs per
+            species1 (top rectangle) cell state
+        sp2_rect_dicts (dict) : Dictionary indicating the number of DEGs per
+            species2 (bottom rectangles) cell states
+        ribbon_widths (list) : Contains information for plotting GS plot flows
+    """
 
     # Rectangle widths
     sp1_rects_dict = {x: len(sp1_genes_dict[x]['all']) for x in sp1_genes_dict}
@@ -254,7 +286,7 @@ def get_sankey_plot_numbers(sp1_genes_dict, sp2_genes_dict):
 
 
 # ============================================================================
-# Shared genes metric (Jaccard index)
+# Calculate Jaccard similarity score based on proportion of shared genes
 
 jaccard_hs = pd.DataFrame(
     index=[f'Hs_{x}' for x in adata_hs.obs['cell_type_coarse'].cat.categories],
@@ -270,7 +302,7 @@ for hs_cell in jaccard_hs.index:
         hs_cell2 = hs_cell.split('_')[1]
         cr_cell2 = cr_cell.split('_')[1]
         hs_genes, cr_genes = get_gene_dict_sets(
-            hs_cell2, [cr_cell2], tf_bool=False, gene_orthology='orthofinder')
+            hs_cell2, [cr_cell2], gene_orthology='orthofinder')
         
         count_hs = len(hs_genes[hs_cell2][f'all'])
         count_cr = len(cr_genes[cr_cell2][f'all'])
@@ -293,6 +325,12 @@ n = 5
 
 def plot_for_hs_cell(hs_cell, fig_width=2.5, ortholog='orthofinder',
                      out_path=out_path):
+    """
+    Function to make and save a GS plot for a given human cell, selecting the
+    other species's cell states which are most similar (based on Jaccard
+    similarity score) to plot against it.
+    """
+
     # --------------------------------
     # Get Ciona cell types to plot
     cr_cell_list = set(jaccard.columns)
@@ -313,7 +351,7 @@ def plot_for_hs_cell(hs_cell, fig_width=2.5, ortholog='orthofinder',
     # --------------------------------
     # Get numbers for plot
     hs_genes, cr_genes = get_gene_dict_sets(
-        hs_cell, cr_cell_list, tf_bool=False, gene_orthology=ortholog)
+        hs_cell, cr_cell_list, gene_orthology=ortholog)
     hs_rects_dict, cr_rects_dict, ribbon_widths = get_sankey_plot_numbers(
         hs_genes, cr_genes)
     hs_rects_unmatched = {x: len(degs_hs[x]) - hs_rects_dict[x]
@@ -366,6 +404,12 @@ n = 5
 
 def plot_for_cr_cell(cr_cell, fig_width=2.5, ortholog='orthofinder',
                      out_path=out_path):
+    """
+    Function to make and save a GS plot for a given cell state in the non-
+    human species, selecting the human cell states which are most similar
+    (based on Jaccard similarity score) to plot against it.
+    """
+
     # Flip similarity scores
     this_jaccard = jaccard.T
 
@@ -378,7 +422,7 @@ def plot_for_cr_cell(cr_cell, fig_width=2.5, ortholog='orthofinder',
                                        ['Hs_'+x for x in hs_cell_list]])[::-1]
     hs_cell_list = list(np.array(hs_cell_list)[order.values])
 
-    # Keep the top n
+    # Keep top n
     hs_cell_list = hs_cell_list[:n]
 
     if len(hs_cell_list) == 0:
@@ -388,7 +432,7 @@ def plot_for_cr_cell(cr_cell, fig_width=2.5, ortholog='orthofinder',
     # --------------------------------
     # Get numbers for plot
     hs_genes, cr_genes = get_gene_dict_sets(
-        cr_cell, hs_cell_list, sp1='ciona', tf_bool=False,
+        cr_cell, hs_cell_list, sp1='ciona',
         gene_orthology=ortholog)
     cr_rects_dict, hs_rects_dict, ribbon_widths = get_sankey_plot_numbers(
         cr_genes, hs_genes)
@@ -409,13 +453,6 @@ def plot_for_cr_cell(cr_cell, fig_width=2.5, ortholog='orthofinder',
     # cr_rects_unmatched = {x.replace(' ', '\n'): cr_rects_unmatched[x] for x in cr_rects_unmatched}
     ribbon_widths = [[x[0]] + [x[1].replace(' ', '\n')] + x[2:]
                      for x in ribbon_widths]
-    # if hs_cell == 'hematopoietic progenitor':
-    #     cr_rects_dict = {x.replace('cLRP', ''): cr_rects_dict[x]
-    #                      for x in cr_rects_dict}
-    #     cr_rects_unmatched = {x.replace('cLRP', ''): cr_rects_unmatched[x]
-    #                             for x in cr_rects_unmatched}
-    #     ribbon_widths = [[x[0]] + [x[1].replace('cLRP', '')] + x[2:]
-    #                      for x in ribbon_widths]
 
     # Plot
     plot_modified_sankey(cr_rects_dict, hs_rects_dict, ribbon_widths,
@@ -445,7 +482,7 @@ plot_for_cr_cell('cMPP', fig_width=3, ortholog='orthofinder', out_path=out_path2
 
 
 # ============================================================================
-# PLOT JACCARD SIMILARITY
+# PLOT JACCARD SIMILARITY IN HEATMAP
 
 jaccard.to_csv(os.path.join(out_path, f'jaccard_similarity_matrix.csv'))
 rows_all_zeros = jaccard.index[jaccard.sum(axis=1) == 0]
@@ -467,17 +504,14 @@ ax = plt.subplot(1, 1, 1)
 sns.heatmap(
     jaccard.loc[sp2_cell_type_order, sp1_cell_type_order].T,
     cmap='rocket_r',
-    xticklabels=True,#[x.split('_')[-1] for x in jaccard.columns],
-    yticklabels=True,#[x.split('_')[-1] for x in jaccard.index])
+    xticklabels=True,
+    yticklabels=True,
     vmin=0, vmax=0.12,
 )
 ax.xaxis.set_ticks_position('top')  # Move ticks to top
 ax.xaxis.set_label_position('top')  # Move label position to top
 ax.set_xticklabels([x.split('_')[-1] for x in sp2_cell_type_order], rotation=90)
 ax.set_yticklabels([x.split('_')[-1] for x in sp1_cell_type_order])
-# ax.set_xlabel(hf.matplotlib_italics(species1.name) + ' cell types')
-# ax.set_ylabel(hf.matplotlib_italics(species2.name) + ' cell types')
-# ax.set_title(f'Cell type homology: {species1.name} vs. {species2.name}')
 plt.tight_layout()
 plt.savefig(os.path.join(out_path, f'jaccard_similarity.pdf'))
 plt.close()
@@ -498,17 +532,14 @@ ax = plt.subplot(1, 1, 1)
 sns.heatmap(
     jaccard.loc[sp1_cell_type_order, sp2_cell_type_order],
     cmap='rocket_r',
-    xticklabels=True,#[x.split('_')[-1] for x in jaccard.columns],
-    yticklabels=True,#[x.split('_')[-1] for x in jaccard.index])
+    xticklabels=True,
+    yticklabels=True,
     vmin=0, vmax=0.12,
 )
 ax.xaxis.set_ticks_position('top')  # Move ticks to top
 ax.xaxis.set_label_position('top')  # Move label position to top
 ax.set_yticklabels([x.split('_')[-1] for x in sp1_cell_type_order])
 ax.set_xticklabels([x.split('_')[-1] for x in sp2_cell_type_order], rotation=90)
-# ax.set_xlabel(hf.matplotlib_italics(species1.name) + ' cell types')
-# ax.set_ylabel(hf.matplotlib_italics(species2.name) + ' cell types')
-# ax.set_title(f'Cell type homology: {species1.name} vs. {species2.name}')
 plt.tight_layout()
 plt.savefig(os.path.join(out_path, f'jaccard_similarity.T.pdf'))
 plt.close()
