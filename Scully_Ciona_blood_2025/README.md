@@ -22,4 +22,4 @@ Contains several helper function files used in scripts throughout the folder.
 - `differentiation_hierarchy_analysis/` contains scripts for performing differentiation hierarchy anlaysis on the data.
 
 ### Subfolder `cross_species_comparisons/`
-- `gs_plots/` contains scripts for making generalized Sankey (GS) plots.
+- `gs_plots/` contains scripts for making generalized Sankey (GS) plots and calculating Jaccard similarity scores.

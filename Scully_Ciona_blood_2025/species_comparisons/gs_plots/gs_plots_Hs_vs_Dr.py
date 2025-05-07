@@ -195,7 +195,7 @@ def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, sp1='human',
     # Initialize dictionaries
     if sp1 == 'human':
         hs_genes_dict = {sp1_cell: {}}
-        cr_genes_dict = {cr_cell: {} for cr_cell in sp2_cell_list}
+        cr_genes_dict = {dr_cell: {} for dr_cell in sp2_cell_list}
     else:
         cr_genes_dict = {sp1_cell: {}}
         hs_genes_dict = {hs_cell: {} for hs_cell in sp2_cell_list}
@@ -205,18 +205,18 @@ def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, sp1='human',
         orthology_pairs = orthofinder_all
 
     # Orthology dicts
-    cr2hs = {}; hs2cr = {}
+    dr2hs = {}; hs2cr = {}
     for dr_g, hs_g, _ in orthology_pairs:
         # Dr to Hs conversion
-        if dr_g not in cr2hs: cr2hs[dr_g] = [hs_g]
-        else: cr2hs[dr_g].append(hs_g)
+        if dr_g not in dr2hs: dr2hs[dr_g] = [hs_g]
+        else: dr2hs[dr_g].append(hs_g)
         # Hs to Dr conversion
         if hs_g not in hs2cr: hs2cr[hs_g] = [dr_g]
         else: hs2cr[hs_g].append(dr_g)
 
-    for cr_cell in cr_genes_dict:
+    for dr_cell in cr_genes_dict:
         for hs_cell in hs_genes_dict:
-            # x = centr_z_dr.loc[cr_cell, [x[0] for x in orthology_pairs]]
+            # x = centr_z_dr.loc[dr_cell, [x[0] for x in orthology_pairs]]
             # y = centr_z_hs.loc[hs_cell, [x[1] for x in orthology_pairs]]
             # w = np.array([x[2] for x in orthology_pairs])
 
@@ -229,20 +229,20 @@ def get_gene_dict_sets(sp1_cell:str, sp2_cell_list:list, sp1='human',
             #     (x >= th).values * (y >= th).values * (w > th_orthology)].index.unique()
             # genes_hs_with_enriched_ortholog = y[
             #     (x >= th).values * (y >= th).values * (w > th_orthology)].index.unique()
-            enriched_genes_dr = set([g for g in degs_dr[cr_cell] if g in cr2hs])
+            enriched_genes_dr = set([g for g in degs_dr[dr_cell] if g in dr2hs])
             enriched_genes_hs = set([g for g in degs_hs[hs_cell] if g in hs2cr])
             genes_dr_w_enriched_ortholog = [
                 g for g in enriched_genes_dr
-                if len(set(cr2hs[g]).intersection(enriched_genes_hs)) > 0]
+                if len(set(dr2hs[g]).intersection(enriched_genes_hs)) > 0]
             genes_hs_w_enriched_ortholog = [
                 g for g in enriched_genes_hs
                 if len(set(hs2cr[g]).intersection(enriched_genes_dr)) > 0]
 
-            cr_genes_dict[cr_cell]['all'] = enriched_genes_dr
+            cr_genes_dict[dr_cell]['all'] = enriched_genes_dr
             hs_genes_dict[hs_cell]['all'] = enriched_genes_hs
-            cr_genes_dict[cr_cell][f'shared_w_{hs_cell}'] = set(
+            cr_genes_dict[dr_cell][f'shared_w_{hs_cell}'] = set(
                 genes_dr_w_enriched_ortholog)
-            hs_genes_dict[hs_cell][f'shared_w_{cr_cell}'] = set(
+            hs_genes_dict[hs_cell][f'shared_w_{dr_cell}'] = set(
                 genes_hs_w_enriched_ortholog)
 
     return hs_genes_dict, cr_genes_dict
@@ -319,19 +319,19 @@ jaccard_cr = pd.DataFrame(
 )
 
 for hs_cell in jaccard_hs.index:
-    for cr_cell in jaccard_hs.columns:
+    for dr_cell in jaccard_hs.columns:
         hs_cell2 = hs_cell.split('_')[1]
-        cr_cell2 = cr_cell.split('_')[1]
+        dr_cell2 = dr_cell.split('_')[1]
         hs_genes, cr_genes = get_gene_dict_sets(
-            hs_cell2, [cr_cell2], gene_orthology='orthofinder')
+            hs_cell2, [dr_cell2], gene_orthology='orthofinder')
         
         count_hs = len(hs_genes[hs_cell2][f'all'])
-        count_dr = len(cr_genes[cr_cell2][f'all'])
-        count_shared_hs = len(hs_genes[hs_cell2][f'shared_w_{cr_cell2}'])
-        count_shared_dr = len(cr_genes[cr_cell2][f'shared_w_{hs_cell2}'])
-        jaccard_hs.loc[hs_cell, cr_cell] = (
+        count_dr = len(cr_genes[dr_cell2][f'all'])
+        count_shared_hs = len(hs_genes[hs_cell2][f'shared_w_{dr_cell2}'])
+        count_shared_dr = len(cr_genes[dr_cell2][f'shared_w_{hs_cell2}'])
+        jaccard_hs.loc[hs_cell, dr_cell] = (
             count_shared_hs / (count_hs + count_dr - count_shared_hs))
-        jaccard_cr.loc[hs_cell, cr_cell] = (
+        jaccard_cr.loc[hs_cell, dr_cell] = (
             count_shared_dr / (count_hs + count_dr - count_shared_dr))
 
 # Overall score is the average of Jaccard index in both directions
@@ -339,7 +339,7 @@ jaccard = (jaccard_cr + jaccard_hs) / 2
 jaccard = jaccard.astype(float)
 
 # ============================================================================
-# Plot
+# Plot for human cell
 
 fig_height = 1.25
 n = 5
@@ -394,11 +394,6 @@ def plot_for_hs_cell(hs_cell, fig_width=2.5, ortholog='orthofinder',
     dr_rects_unmatched = {x.replace(' ', '\n'): dr_rects_unmatched[x] for x in dr_rects_unmatched}
     ribbon_widths = [[x[0].replace(' ', '\n')] + [x[1].replace(' ', '\n')] + x[2:]
                      for x in ribbon_widths]
-    if hs_cell == 'hematopoietic progenitor':
-        dr_rects_dict = {x.replace('cLRP', ''): dr_rects_dict[x]
-                         for x in dr_rects_dict}
-        ribbon_widths = [[x[0]] + [x[1].replace('cLRP', '')] + x[2:]
-                         for x in ribbon_widths]
 
     # Plot
     plot_modified_sankey(hs_rects_dict, dr_rects_dict, ribbon_widths,
@@ -448,7 +443,7 @@ def plot_for_dr_cell(dr_cell, fig_width=2.5, ortholog='orthofinder',
     order = np.argsort(this_jaccard.loc['Dr_' + dr_cell,
                                        ['Hs_'+x for x in hs_cell_list]])[::-1]
     hs_cell_list = list(np.array(hs_cell_list)[order.values])
-    
+
     # Keep top n
     hs_cell_list = hs_cell_list[:n]
 
@@ -472,7 +467,6 @@ def plot_for_dr_cell(dr_cell, fig_width=2.5, ortholog='orthofinder',
     hs_rects_dict = {x: hs_rects_dict[x] for x in hs_rects_dict
                      if (hs_rects_dict[x] > 10) and (x in [y[1] for y in ribbon_widths])}
     ribbon_widths = [x for x in ribbon_widths if x[1] in hs_rects_dict]
-    hs_cell_list_updated = [x for x in hs_rects_dict]
 
     # Rename cell types for plotting
     hs_rects_dict = {x.replace(' ', '\n'): hs_rects_dict[x] for x in hs_rects_dict}
