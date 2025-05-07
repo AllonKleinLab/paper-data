@@ -8,8 +8,7 @@ import sys
 import os
 from tqdm import tqdm
 
-# Change this path to point to folder containing gene_hf.py
-# This imports dictionaries and functions for easily converting gene ids
+# Change this path to point to folder containing helper functions scripts
 path_to_repo_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.join(path_to_repo_dir, 'helper_functions'))
 import scrna_helper_functions as hf
