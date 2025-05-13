@@ -1,21 +1,28 @@
 The scripts in this folder were used to analyze images for HCR FISH, specifically to visualize images using [napari](https://napari.org/stable/index.html), then to facilitate quick manual matching of cells between the _pre-FISH live_, _pre-FISH fixed_, and _post-FISH_ fluorescence rounds of imaging. See methods sections "Cell Preparation for HCR FISH with Live Imaging" for a description of the pre-FISH image collection, and "HCR FISH" for a description of the _post-FISH_ imaging and image analysis summary.
 
 Key files in this folder:
-- `image_analysis_scripts/cropped_cell_images.py` runs the image analysis pipeline. This readme describes how to run it, and what file structure it expects for raw image files.
+- `image_analysis_pipeline.py` runs the image analysis pipeline. This readme describes how to run it, and what file structure it expects for raw image files.
 - `napari_image_analysis_env.txt` contains information on the conda environment used, saved to a text file (by running `conda list --explicit > napari_image_analysis_env.txt`).
+- `raw_images/` is a folder which must contain the raw imaging files to successfully run `image_analysis_pipeline.py`. See "[Subfolder structure](#subfolder-structure)" for more detail.
+- `HCR_PROBES_MASTER_LIST.xlsx` is an excel spreadsheet containing a conversion between probe IDs used in python scripts (e.g. HP14) and genes labeled (e.g. KY21.Chr11.687). This is needed to run `image_analysis_pipeline.py`.
 
-## Image anlaysis pipeline use
+---
+
+## Image analysis pipeline use
+
 ### Opening images
-Make sure your working directory is `Scully_Ciona_blood_2025/HCR_FISH/napari_image_analysis_pipeline/image_analysis_scripts/`. Make sure the images for the sample to be analyzed are arranged as described below in "[Subfolder structure](#subfolder-structure)". To open an image withe the napari pipeline, run:
+Make sure the images for the sample to be analyzed are arranged as described below in "[Subfolder structure](#subfolder-structure)". _[TO DO: Add instructions for downloading the example images.]_
+
+To open an image withe the napari pipeline, run:
 ```
-python3 cropped_cell_images.py --sample <sample_name>
+python3 image_analysis_pipeline.py --sample <sample_name>
 ```
-where `<sample_name>` is something like `s1`.
+For the example images, the sample name is `s1`.
 
 Optionally, you can also specify the following arguments:
 - `--image_folder` - path to the raw widefield & confocal images. If not specified, script assumes subfolder structure as described in "[Subfolder structure](#subfolder-structure)".
 - `--z_range` - two integers separated by commas (e.g. `2,8`), the range of z slices to use. If not specified, script loads all z-slices. Maximum-intensity projections of loaded z-slices are displayed.
-- `--fov_range` - two integers separated by commas (e.g. `21,23`), the range of XY positions (fields of view) to use. If not specified, script loads all FOVs.
+- `--fov_range` - two integers separated by commas (e.g. `0,5`), the range of XY positions (fields of view) to use. If not specified, script loads all FOVs. E.g. to run a quick test loading only some of the example images, run `python3 image_analysis_pipeline.py --sample s1 --fov_range 0,5`.
 
 
 It will take a few minutes for the files to load. When that's done, a napari viewer window will open showing all imaging channels. The window will look something like this:
@@ -41,7 +48,7 @@ The layers in the napari viewer are:
 
 2. Images initially appear in black and white (gray look-up-table) for more consistent contrast limit setting. Click "Fluorescent channels color" to set the look-up-tables for each channel to different colors. (Click "Fluorescent channels gray" to go back to non-pseudocolored view). Cropped images will be saved in whatever colors are set in the napari viewer at the time of saving.
 
-3. If helfpul for more easily matching cells between rounds of imaging, the _pre-FISH live_ images can be shifted relative to the others. Use the widget second from the top right to adjust x and y, then click "Shift live images".
+3. If helfpul for more easily matching cells between rounds of imaging, the _pre-FISH live_ images can be shifted relative to the others. Use the widget second from the top right to adjust x and y, then click "Shift live images". For the example sample, we recommend setting x=0 and y=45.
 
 ### Saving cropped images of single cells
 The pipeline is designed to easily save cropped images of individual cells' live morphologies and HCR FISH fluorescence. [This video](https://youtu.be/V9NSjeSv_N4) shows how to use the viewer to save cropped images of a marker-positive cell.

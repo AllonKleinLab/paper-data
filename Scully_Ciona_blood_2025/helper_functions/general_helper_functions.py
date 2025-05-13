@@ -70,9 +70,8 @@ class Species:
 # Creating output paths for scripts
 
 def add_output_path(dir_name=''):
-    if dir_name[-1] == '/': dir_name = dir_name[:-1]
-    if not os.path.exists(dir_name + '/'): os.mkdir(dir_name + '/')
-    return dir_name + '/'
+    if not os.path.exists(dir_name): os.mkdir(dir_name)
+    return dir_name
 
 
 # ============================================================================

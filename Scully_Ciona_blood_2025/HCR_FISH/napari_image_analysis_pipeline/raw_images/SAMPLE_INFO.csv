@@ -1,0 +1,4 @@
+Example SAMPLE_INFO.csv file,,,,,
+See ../HCR_PROBES_MASTER_LIST.xlsx for conversion from probe ID ("HP##") to gene,,,,,,
+Sample,Cluster(s),405,488,561,640,Notes
+s1,15,DAPI,HP14,HP31,HP32,
