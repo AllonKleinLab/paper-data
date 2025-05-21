@@ -23,3 +23,4 @@ Contains several helper function files used in scripts throughout the folder.
 
 ### Subfolder `cross_species_comparisons/`
 - `gs_plots/` contains scripts for making generalized Sankey (GS) plots and calculating Jaccard similarity scores.
+- `coexpression_conservation/` contains scripts for quantifying gene coexpression conservation.
