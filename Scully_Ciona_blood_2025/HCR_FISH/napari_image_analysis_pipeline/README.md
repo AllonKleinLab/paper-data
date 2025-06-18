@@ -2,7 +2,7 @@ The scripts in this folder were used to analyze images for HCR FISH, specificall
 
 Key files in this folder:
 - `image_analysis_pipeline.py` runs the image analysis pipeline. This readme describes how to run it, and what file structure it expects for raw image files.
-- `napari_image_analysis_env.txt` contains information on the conda environment used, saved to a text file (by running `conda list --explicit > napari_image_analysis_env.txt`).
+- `napari_image_analysis_env.yml` and `napari_image_analysis_env.txt` contain information on the conda environment used, saved to a text file (by running `conda env export --no-builds > napari_image_analysis_env.yml` and `conda list --explicit > napari_image_analysis_env.txt`). The .txt files is for MacOS only.
 - `raw_images/` is a folder which must contain the raw imaging files to successfully run `image_analysis_pipeline.py`. See "[Subfolder structure](#subfolder-structure)" for more detail.
 - `HCR_PROBES_MASTER_LIST.xlsx` is an excel spreadsheet containing a conversion between probe IDs used in python scripts (e.g. HP14) and genes labeled (e.g. KY21.Chr11.687). This is needed to run `image_analysis_pipeline.py`.
 

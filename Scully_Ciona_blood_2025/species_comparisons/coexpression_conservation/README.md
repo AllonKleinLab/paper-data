@@ -7,7 +7,7 @@ The files are:
     - PDFs with example AUROC curves for select gene pairs
 - `tf_coexpr_Hs_vs_Cr.py` is a python script that looks at coexpression conservation scores for a select set of hematopoiesis-related TFs. The script saves outputs in a folder `tf_coexpr_Hs_vs_Cr_output/` containing graphs in Fig. 6f-h and Supplementary Fig. 9.
 - `coexpr_cons_Hs_vs_Dr.py` and `tf_coexpr_Hs_vs_Dr.py` are python scripts which repeat these analyses for the human vs. zebrafish comparison.
-- `single_cell_analysis_env.txt` contains information on the conda environment used, saved to a text file (by running `conda list --explicit > single_cell_analysis_env.txt`).
+- `single_cell_analysis_env.yml` and `single_cell_analysis_env.txt` contain information on the conda environment used, saved to a text file (by running `conda env export --no-builds > single_cell_analysis_env.yml` and `conda list --explicit > single_cell_analysis_env.txt`). The .txt files is for MacOS only.
 
 Note that the functions for actually calculating coexpression conservation AUROCs are in the helper_functions folder: `Scully_Ciona_blood_2025/helper_functions/gillis_style_coexpression_hf.py`. These functions are imported by the python scripts in this folder.
 
