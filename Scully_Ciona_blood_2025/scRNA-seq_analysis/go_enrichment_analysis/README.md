@@ -2,4 +2,4 @@ The scripts in this folder were used to run Gene Ontology (GO) enrichment analys
 
 The files are:
 - `go_enrichment_analysis.py` is the python script that performs GO analysis. The script outputs a folder `go_enrichment_analysis_output/` containing tsv files with results from Fisher's exact test of GO term enrichment for each cell state's enriched DEGs.
-- `go_enrichment_env.txt` contains information on the conda environment used, saved to a text file (by running `conda list --explicit > go_enrichment_env.txt`).
+- `go_enrichment_env.yml` and `go_enrichment_env.txt` contain information on the conda environment used, saved to a text file (by running `conda env export --no-builds > go_enrichment_env.yml` and `conda list --explicit > go_enrichment_env.txt`). The .txt files is for MacOS only.

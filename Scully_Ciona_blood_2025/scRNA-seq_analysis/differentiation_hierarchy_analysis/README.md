@@ -2,4 +2,4 @@ The scripts in this folder were used to generate a hypothesized hematopoietic hi
 
 The files are:
 - `differentiation_graph.py` is the python script that uses the scRNA-seq data to generate a hypothesized hierarchy. The script outputs a folder `differentiation_graph_output/` containing plots of the inferred hierarchy (graph, adjacency matrix), a text file listing cell states not connected to other nodes in the graph, as well as miscellaneous supporting plots.
-- `differentiation_graph_env.txt` contains information on the conda environment used, saved to a text file (by running `conda list --explicit > differentiation_graph_env.txt`).
+- `differentiation_graph_env.yml` and `differentiation_graph_env.txt` contain information on the conda environment used, saved to a text file (by running `conda env export --no-builds > differentiation_graph_env.yml` and `conda list --explicit > differentiation_graph_env.txt`). The .txt files is for MacOS only.
