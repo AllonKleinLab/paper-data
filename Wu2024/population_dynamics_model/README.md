@@ -1,1 +1,1 @@
-
+The code in this folder focuses on the population dynamics modeling performed. This includes both the implementation of the modeling simulations with one set of predefined physiologically relevant parameters and another implementation where the parameters are scanned one at a time to understand the overall macro behaviors of the system.
