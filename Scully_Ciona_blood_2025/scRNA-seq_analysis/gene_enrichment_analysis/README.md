@@ -1,4 +1,4 @@
-The scripts in this folder were used to run Gene Ontology (GO) enrichment analysis. See methods section "Gene Ontology Enrichment Analysis".
+The scripts in this folder were used to run gene enrichment analysis. See methods section "Gene Enrichment Analysis".
 
 The files are:
 
