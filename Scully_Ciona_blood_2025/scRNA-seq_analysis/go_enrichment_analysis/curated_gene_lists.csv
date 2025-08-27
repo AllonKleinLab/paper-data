@@ -1,0 +1,157 @@
+﻿Gene set name,Human homolog(s) or gene description,Reference,Ciona gene(s),Ortholog source
+Carbon dioxide transport and pH balance,Carbonic anhydrases,Wagner 2023 [PMID: 37567251],KY21.Chr13.352,BLAST
+Carbon dioxide transport and pH balance,Carbonic anhydrases,Wagner 2023 [PMID: 37567251],KY21.Chr13.379,OrthoFinder
+Carbon dioxide transport and pH balance,Carbonic anhydrases,Wagner 2023 [PMID: 37567251],KY21.Chr13.378,BLAST
+Carbon dioxide transport and pH balance,Carbonic anhydrases,Wagner 2023 [PMID: 37567251],KY21.Chr12.316,BLAST
+Carbon dioxide transport and pH balance,Carbonic anhydrases,Wagner 2023 [PMID: 37567251],KY21.Chr14.182,BLAST
+Carbon dioxide transport and pH balance,Carbonic anhydrases,Wagner 2023 [PMID: 37567251],KY21.Chr1.1715,OrthoFinder
+Carbon dioxide transport and pH balance,Hemoglobin,Wagner 2023 [PMID: 37567251],KY21.Chr11.625,Ebner et al. 2003
+Carbon dioxide transport and pH balance,Hemoglobin,Wagner 2023 [PMID: 37567251],KY21.Chr11.626,Ebner et al. 2003
+Carbon dioxide transport and pH balance,Hemoglobin,Wagner 2023 [PMID: 37567251],KY21.Chr3.1403,Ebner et al. 2003
+Carbon dioxide transport and pH balance,Hemoglobin,Wagner 2023 [PMID: 37567251],KY21.Chr2.433,Ebner et al. 2003
+Carbon dioxide transport and pH balance,SLC4A1,Jennings 1989 [PMID: 2660831],KY21.Chr9.128,OrthoFinder
+Histamine synthesis,SLC7A5,Scalise et al. 2021 [PMID: 34770970],KY21.Chr3.21,OrthoFinder
+Histamine synthesis,HDC,Haas et al. 2008 [PMID: 18626069],KY21.Chr6.670,OrthoFinder
+Histamine synthesis,SLC18A2,Haas et al. 2008 [PMID: 18626069],KY21.Chr4.619,OrthoFinder
+Histamine synthesis,SLC18A2,Haas et al. 2008 [PMID: 18626069],KY21.Chr4.620,OrthoFinder
+Histamine synthesis,SLC18A2,Haas et al. 2008 [PMID: 18626069],KY21.Chr4.622,OrthoFinder
+Histamine synthesis,SLC18A2,Haas et al. 2008 [PMID: 18626069],KY21.Chr4.623,OrthoFinder
+Histamine synthesis,SRGN,Ringvall et al. 2008 [PMID: xxxx],none,
+Histamine metabolism,HNMT,Haas et al. 2008 [PMID: 18626069],none,
+Histamine metabolism,DAO,Haas et al. 2008 [PMID: 18626069],KY21.Chr5.650,OrthoFinder
+Histamine metabolism,DAO,Haas et al. 2008 [PMID: 18626069],KY21.Chr5.651,OrthoFinder
+Histamine metabolism,MAOB,Haas et al. 2008 [PMID: 18626069],KY21.Chr3.27,OrthoFinder
+Histamine receptors,HRH1,"Kucher and Cherevko 2018 ""Genes of the histamine pathway and common diseases""",none,
+Histamine receptors,HRH2,"Kucher and Cherevko 2018 ""Genes of the histamine pathway and common diseases""",KY21.Chr2.513,OrthoFinder
+Histamine receptors,HRH2,"Kucher and Cherevko 2018 ""Genes of the histamine pathway and common diseases""",KY21.Chr8.541,OrthoFinder
+Histamine receptors,HRH3,"Kucher and Cherevko 2018 ""Genes of the histamine pathway and common diseases""",none,
+Histamine receptors,HRH4,"Kucher and Cherevko 2018 ""Genes of the histamine pathway and common diseases""",none,
+Adhesion of blood cells to endothelium,ITGB2,Wautier and Wautier 2020 [PMID: 32727002],KY21.Chr1.794,OrthoFinder
+Adhesion of blood cells to endothelium,ITGAL,Wautier and Wautier 2020 [PMID: 32727002],none,
+Adhesion of blood cells to endothelium,ITGAM,Wautier and Wautier 2020 [PMID: 32727002],KY21.Chr8.875,BLAST
+Adhesion of blood cells to endothelium,ITGAM,Wautier and Wautier 2020 [PMID: 32727002],KY21.Chr9.960,BLAST
+Adhesion of blood cells to endothelium,ITGAM,Wautier and Wautier 2020 [PMID: 32727002],KY21.Chr9.961,BLAST
+Adhesion of blood cells to endothelium,ITGAX,Wautier and Wautier 2020 [PMID: 32727002],none,
+Adhesion of blood cells to endothelium,ITGAD,Wautier and Wautier 2020 [PMID: 32727002],none,
+Adhesion of blood cells to endothelium,ICAM1,Wautier and Wautier 2020 [PMID: 32727002],none,
+Adhesion of blood cells to endothelium,ICAM2,Wautier and Wautier 2020 [PMID: 32727002],none,
+Adhesion of blood cells to endothelium,ICAM3,Wautier and Wautier 2020 [PMID: 32727002],none,
+Adhesion of blood cells to endothelium,ICAM5,Wautier and Wautier 2020 [PMID: 32727002],none,
+Adhesion of blood cells to endothelium,VCAM1,Wautier and Wautier 2020 [PMID: 32727002],none,
+Neutrophil extracellular trap,PADI4,Thiam et al. 2020 [PMID: 32663035],none,
+Neutrophil extracellular trap,GSDMD,Thiam et al. 2020 [PMID: 32663035],none,
+Neutrophil primary granules,MPO,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr5.286,OrthoFinder
+Neutrophil primary granules,MPO,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr8.981,OrthoFinder
+Neutrophil primary granules,CTSG,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil primary granules,ELANE,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil primary granules,PRTN3,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil primary granules,PRSS57,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil primary granules,AZU1,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil primary granules,Defensins,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil primary granules,BPI,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr14.280,OrthoFinder
+Neutrophil primary granules,BPI,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr14.277,OrthoFinder
+Neutrophil primary granules,BPI,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr12.536,BLAST
+Neutrophil secondary granules,MMP1,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil secondary granules,ALPL/I/G/P,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.1618,OrthoFinder
+Neutrophil secondary granules,ALPL/I/G/P,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.1619,OrthoFinder
+Neutrophil secondary granules,ALPI,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.1981,BLAST
+Neutrophil secondary granules,ALPL/I/G/P,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr11.885,OrthoFinder
+Neutrophil secondary granules,ALPL/I/G/P,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr6.222,OrthoFinder
+Neutrophil secondary granules,ALPL/I/G/P,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr9.1126,OrthoFinder
+Neutrophil secondary granules,LYZ,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil secondary granules,CAMP,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil secondary granules,LTF,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr7.304,OrthoFinder
+Neutrophil secondary granules,CYBB/NOX1/NOX3,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr6.423,OrthoFinder
+Neutrophil secondary granules,NOX4,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr6.253,OrthoFinder
+Neutrophil secondary granules,DUOX1/2,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.148,OrthoFinder
+Neutrophil secondary granules,DUOX1/2,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.1823,BLAST
+Neutrophil secondary granules,DUOX1/2,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.330,OrthoFinder
+Neutrophil secondary granules,DUOX1/2,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr2.364,OrthoFinder
+Neutrophil tertiary granules,MMP2/9,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr3.661,OrthoFinder
+Neutrophil tertiary granules,CTSA,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr11.233,OrthoFinder
+Neutrophil tertiary granules,CTSA,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr2.1216,BLAST
+Neutrophil tertiary granules,CTSA,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr11.233,BLAST
+Neutrophil tertiary granules,CTSA,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr3.116,BLAST
+Neutrophil tertiary granules,CTSB,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr5.51,OrthoFinder
+Neutrophil tertiary granules,CTSC,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.1142,OrthoFinder
+Neutrophil tertiary granules,CTSD,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr1.583,OrthoFinder
+Neutrophil tertiary granules,CTSD,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr6.135,OrthoFinder
+Neutrophil tertiary granules,CTSF,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr12.96,OrthoFinder
+Neutrophil tertiary granules,CTSH,Chistiakov et al. 2015 [PMID: 26551083],KY21.Chr3.262,OrthoFinder
+Neutrophil tertiary granules,LCN2,Chistiakov et al. 2015 [PMID: 26551083],none,
+Neutrophil degranulation,FPR1/2,Lacy 2006 [PMID: 20525154],none,
+Neutrophil degranulation,CXCR1,Lacy 2006 [PMID: 20525154],none,
+Neutrophil degranulation,PIK3CA,Lacy 2006 [PMID: 20525154],KY21.Chr1.15,
+Neutrophil degranulation,PIK3CB/D,Lacy 2006 [PMID: 20525154],KY21.Chr1.614,
+Neutrophil degranulation,PIK3R1/2/3,Lacy 2006 [PMID: 20525154],KY21.Chr8.568,
+Neutrophil degranulation,HCK,Lacy 2006 [PMID: 20525154],none,
+Neutrophil degranulation,FGR,Lacy 2006 [PMID: 20525154],KY21.Chr1.941,OrthoFinder
+Neutrophil degranulation,FGR,Lacy 2006 [PMID: 20525154],KY21.Chr7.1155,OrthoFinder
+Neutrophil degranulation,LYN,Lacy 2006 [PMID: 20525154],none,
+Neutrophil degranulation,ARRB1/2,Lacy 2006 [PMID: 20525154],KY21.Chr1.563,OrthoFinder
+Neutrophil degranulation,RAC1/2/3,Lacy 2006 [PMID: 20525154],KY21.Chr9.784,OrthoFinder
+Neutrophil degranulation,VAMP7,Lacy 2006 [PMID: 20525154],KY21.Chr14.126,OrthoFinder
+Neutrophil degranulation,STX4,Lacy 2006 [PMID: 20525154],none,
+Neutrophil degranulation,STX6,Lacy 2006 [PMID: 20525154],KY21.Chr13.271,OrthoFinder
+Neutrophil degranulation,SNAP23,Lacy 2006 [PMID: 20525154],KY21.Chr11.752,OrthoFinder
+Neutrophil degranulation,PTPN9,Lacy 2006 [PMID: 20525154],none,
+Ciona cytotoxicity,"Ciona phenoloxidase, PO-1",Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr11.370,
+Ciona cytotoxicity,"Ciona phenoloxidase, PO-2",Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr11.683,
+Ciona cytotoxicity,"Ciona galectin, Lgal-a",Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr4.806,
+Ciona cytotoxicity,"Ciona galectin, Lgal-b",Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr6.42,
+Ciona cytotoxicity,PLA2G7,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr7.975,
+Ciona cytotoxicity,PLA2G7,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr7.974,
+Ciona cytotoxicity,PLA2G15,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr3.478,
+Ciona cytotoxicity,PLA2G6,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr6.94,
+Ciona cytotoxicity,PLA2G1B,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr3.734,
+Ciona cytotoxicity,PLA2G4A,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr9.1051,
+Ciona cytotoxicity,PLA2G1B,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr2.827,
+Ciona cytotoxicity,PLA2G1B,Parrinello et al. 2020 [PMID: 31610182] and Arizza et al. 2021 [PMID: 21288494],KY21.Chr5.408,
+Ciona antimicrobial peptide,Ciona predicted AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr3.500,
+Ciona antimicrobial peptide,"Ciona predicted AMP, Ci-MAM-D",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr1.270,
+Ciona antimicrobial peptide,"Ciona confirmed AMP, Ci-MAM-A",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr1.265,
+Ciona antimicrobial peptide,Ciona confirmed AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr3.504,
+Ciona antimicrobial peptide,"Ciona predicted AMP, Ci-MAM-B",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr13.190,
+Ciona antimicrobial peptide,"Ciona predicted AMP, Ci-MAM-C",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr13.189,
+Ciona antimicrobial peptide,Ciona confirmed AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr2.890,
+Ciona antimicrobial peptide,"Ciona predicted AMP, Ci-MAM-E",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr1.267,
+Ciona antimicrobial peptide,Ciona confirmed AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr1.522,
+Ciona antimicrobial peptide,Ciona confirmed AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr13.185,
+Ciona antimicrobial peptide,Ciona predicted AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr13.181,
+Ciona antimicrobial peptide,"Ciona confirmed AMP, Ci-PAP-A*",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr1.1759,
+Ciona antimicrobial peptide,"Ciona confirmed AMP, Ci-META4*",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr14.165,
+Ciona antimicrobial peptide,"Ciona predicted AMP, Ci-META6",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr1.1218,
+Ciona antimicrobial peptide,Ciona predicted AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr10.596,
+Ciona antimicrobial peptide,"Ciona confirmed AMP, Ci-META4*",Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr14.167,
+Ciona antimicrobial peptide,Ciona predicted AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr5.457,
+Ciona antimicrobial peptide,Ciona predicted AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr13.65,
+Ciona antimicrobial peptide,Ciona predicted AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr4.294,
+Ciona antimicrobial peptide,Ciona confirmed AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr7.694,
+Ciona antimicrobial peptide,Ciona predicted AMP,Ohtsuka and Inagaki 2022 [PMID: 32724213],KY21.Chr3.111,
+Vanadium binding,Ciona Van3,Trivedi et al. 2003 [PMID: 14654236],KY21.Chr3.258,
+Vanadium binding,Ciona Van1,Trivedi et al. 2003 [PMID: 14654236],KY21.Chr3.259,
+Vanadium binding,Ciona Van5,Trivedi et al. 2003 [PMID: 14654236],KY21.Chr3.260,
+Vanadium binding,Ciona Van2,Trivedi et al. 2003 [PMID: 14654236],KY21.Chr3.257,
+Vanadium binding,Ciona Van4,Trivedi et al. 2003 [PMID: 14654236],KY21.Chr3.256,
+Complement,FCN1/FCN2/FCN3,,KY21.Chr7.840,OrthoFinder
+Complement,C6,,KY21.Chr14.172,BLAST
+Complement,C6,,KY21.Chr14.171,BLAST
+Complement,FCN1,,KY21.Chr3.276,BLAST
+Complement,MASP1/MASP2,,KY21.Chr1.279,OrthoFinder
+Complement,C3,,KY21.Chr11.1049,BLAST
+Complement,C2/CFB/ENSG00000244255,,KY21.Chr13.237,OrthoFinder
+Complement,C2/CFB/ENSG00000244255,,KY21.Chr13.234,OrthoFinder
+Complement,FCN1/FCN2/FCN3,,KY21.Chr9.907,OrthoFinder
+Complement,CFP,,KY21.Chr1.651,OrthoFinder
+Complement,C3,,KY21.Chr12.969,BLAST
+Complement,FCN1/FCN2/FCN3,,KY21.Chr9.908,OrthoFinder
+Complement,MASP1/MASP2,,KY21.Chr1.475,OrthoFinder
+Complement,C6,,KY21.Chr1.1559,BLAST
+Complement,CFP,,KY21.Chr1.2148,OrthoFinder
+Complement,CFP,,KY21.Chr1.2147,OrthoFinder
+Complement,C8A/C8B,,KY21.Chr11.714,OrthoFinder
+Complement,C8A/C8B,,KY21.Chr11.712,OrthoFinder
+Complement,FCN1,,KY21.Chr9.1146,BLAST
+Complement,C8A/C8B,,KY21.Chr11.710,OrthoFinder
+Complement,C8A/C8B,,KY21.Chr11.711,OrthoFinder
+Complement,MBL2,,KY21.Chr12.617,BLAST

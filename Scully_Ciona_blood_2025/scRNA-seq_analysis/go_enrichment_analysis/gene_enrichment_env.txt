@@ -68,5 +68,3 @@ https://repo.anaconda.com/pkgs/main/osx-64/ruamel.yaml-0.17.21-py39hca72f7f_0.co
 https://repo.anaconda.com/pkgs/main/osx-64/zstandard-0.22.0-py39h2d76c9a_0.conda
 https://repo.anaconda.com/pkgs/main/osx-64/conda-package-streaming-0.10.0-py39hecd8cb5_0.conda
 https://repo.anaconda.com/pkgs/main/osx-64/conda-package-handling-2.3.0-py39hecd8cb5_0.conda
-https://repo.anaconda.com/pkgs/main/noarch/conda-libmamba-solver-24.7.0-pyhd3eb1b0_0.conda
-https://repo.anaconda.com/pkgs/main/osx-64/conda-24.7.1-py39hecd8cb5_0.conda

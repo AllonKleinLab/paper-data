@@ -1,4 +1,4 @@
-name: base
+name: gseapy_bio_env
 channels:
   - bioconda
   - conda-forge
@@ -13,8 +13,6 @@ dependencies:
   - certifi=2024.7.4
   - cffi=1.16.0
   - charset-normalizer=3.3.2
-  - conda=24.7.1
-  - conda-libmamba-solver=24.7.0
   - conda-package-handling=2.3.0
   - conda-package-streaming=0.10.0
   - distro=1.9.0
@@ -75,6 +73,7 @@ dependencies:
       - anndata==0.10.8
       - array-api-compat==1.8
       - asttokens==2.4.1
+      - biopython==1.85
       - contourpy==1.2.1
       - cycler==0.12.1
       - decorator==5.1.1
@@ -126,4 +125,4 @@ dependencies:
       - umap-learn==0.5.6
       - wcwidth==0.2.13
       - zipp==3.20.0
-prefix: /Users/tds12/opt/miniconda3
+prefix: /Users/tds12/opt/miniconda3/envs/gseapy_bio_env
