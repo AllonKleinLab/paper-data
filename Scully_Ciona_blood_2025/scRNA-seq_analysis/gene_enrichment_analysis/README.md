@@ -13,6 +13,3 @@ _Enrichment analysis on KEGG Pathways:_
 
 _Supporting files:_
 - `gene_enrichment_env.yml` and `gene_enrichment_env.txt` contain information on the conda environment used, saved to a text file (by running `conda env export --no-builds > gene_enrichment_env.yml` and `conda list --explicit > gene_enrichment_env.txt`). The .txt files is for MacOS only.
-
-<!-- - `go_enrichment_analysis.py` is the python script that performs GO analysis. The script outputs a folder `go_enrichment_analysis_output/` containing tsv files with results from Fisher's exact test of GO term enrichment for each cell state's enriched DEGs.
-- `go_enrichment_env.yml` and `go_enrichment_env.txt` contain information on the conda environment used, saved to a text file (by running `conda env export --no-builds > go_enrichment_env.yml` and `conda list --explicit > go_enrichment_env.txt`). The .txt files is for MacOS only. -->
