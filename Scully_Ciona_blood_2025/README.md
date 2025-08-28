@@ -18,6 +18,7 @@ Contains several helper function files used in scripts throughout the folder.
 - `napari_image_analysis_pipeline/` contains the custom image analysis pipeline written with napari, used to process image files and to match cells between live and post-HCR FISH rounds of imaging.
 
 ### Subfolder `scRNA-seq_analysis/`
+- `gene_enrichment_analysis/` contains scripts for performing gene enrichment analysis in _C. robusta_.
 - `go_enrichment_analysis/` contains scripts for performing GO enrichment analysis in _C. robusta_.
 - `differentiation_hierarchy_analysis/` contains scripts for performing differentiation hierarchy anlaysis on the data.
 

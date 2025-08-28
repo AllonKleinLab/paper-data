@@ -6,6 +6,10 @@ Scully_Ciona_blood_2025/data/*
 !Scully_Ciona_blood_2025/data/README.md
 
 Scully_Ciona_blood_2025/scRNA-seq_analysis/go_enrichment_analysis/go_enrichment_analysis_output/*
+Scully_Ciona_blood_2025/scRNA-seq_analysis/gene_enrichment_analysis/curated_gene_sets_fishers_output/*
+Scully_Ciona_blood_2025/scRNA-seq_analysis/gene_enrichment_analysis/curated_gene_sets_gsea_output/*
+Scully_Ciona_blood_2025/scRNA-seq_analysis/gene_enrichment_analysis/kegg_pathway_fishers_output/*
+Scully_Ciona_blood_2025/scRNA-seq_analysis/gene_enrichment_analysis/kegg_pathway_gsea_output/*
 Scully_Ciona_blood_2025/scRNA-seq_analysis/differentiation_hierarchy_analysis/differentiation_graph_output/*
 
 Scully_Ciona_blood_2025/species_comparisons/gs_plots/gs_plots_Hs_vs_Cr_output/*
