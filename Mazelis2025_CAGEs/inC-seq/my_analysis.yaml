@@ -1,0 +1,20 @@
+project_name : "inCseq"
+project_dir : "test_out/"
+sequencing_runs : 
+  - name : 'Part_A'
+    version : 'v3'
+    dir : "/path/to/fastq/"
+    fastq_path : "Sample_{split_affix}_{read}.fastq.gz"
+    split_affixes : ["L001", "L002", "L003", "L004"]
+    libraries :
+       - {library_name: "Library1", library_index: "TATGCAGT"}
+       - {library_name: "Library1", library_index: "TACTCCTT"}
+paths :
+  python_dir : "path/to/python/"
+  samtools_dir : "pth/to/samtools"
+parameters :
+  trimmomatic_arguments:
+    MINLEN: "20"
+    argument_order: ['MINLEN']
+  output_arguments:
+    output_unaligned_reads_to_other_fastq : False
