@@ -11,7 +11,9 @@ Adapted and updated from https://github.com/indrops/indrops
 
 # Principle
 This code takes raw fastq files, demultiplexes them based on library index sequences in the yaml file, filters the low quality reads with incorect barcodes and outputs two fastq files: 1 for cDNA sequence and 1 for barcode sequence.
-The following two files can then be used in STARsolo pipeline.
+The following two files can then be used in STARsolo pipeline 
+
+STARsolo_wrapper contain the script to read .yaml file, infer the outputs of filter step and run STARsolo
 
 ### Filtering step
 This iterates over sequencing run parts, optionally filtered by a list of sequencing parts, and a list of libraries of interest.
