@@ -1,0 +1,1 @@
+Download datasets directly from GEO ([GSE292926](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE292926)) into this folder, or run the `download_datasets.sh` script to do it via the command line.
