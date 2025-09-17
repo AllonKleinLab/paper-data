@@ -109,7 +109,8 @@ def pl_umap_separate(adata, color:str, title=None, palette=None, s=None,
 
 
 def neighborhood_composition(adata, obs, num_neighbors=200, use_rep='X_pca',
-                             use_existing_neighbor_graph=False):
+                             use_existing_neighbor_graph=False,
+                             cell_subset=None):
     """
     This function returns a pandas DataFrame with the number of neighbors in
     a given obs category.
@@ -144,24 +145,28 @@ def neighborhood_composition(adata, obs, num_neighbors=200, use_rep='X_pca',
     # 2. For each cell, get number of neighbors in each sample/condition
     print(f'Counting # of cells from each sample in neighborhood...')
 
+    # All cells or subset of cells
+    if cell_subset is None:
+        cell_subset = adata.obs.index
+    cells = adata.obs.index[cells]
+
     # Initialize
     neighborhood_df = pd.DataFrame(
-        np.zeros([adata.shape[0], len(np.unique(adata.obs[obs]))]),
-        index=adata.obs.index,
-        columns=np.unique(adata.obs[obs])
+        np.zeros([len(cell_subset), len(adata.obs[obs].unique())]),
+        index=cell_subset,
+        columns=adata.obs[obs].unique()
     )
     neighborhood_df = neighborhood_df.astype(int)
     
     # Loop through cells, count # neighbors for each condition
-    for iCell in tqdm(range(adata.shape[0])):
+    for bc in tqdm(cell_subset):
         # Get neighbors + their sample for this cell
-        these_neighbors = neighbors[np.where(cells == iCell)[0]]
+        these_neighbors = neighbors[np.where(cells == bc)[0]]
         neighbor_vals = adata.obs.loc[adata.obs.index[these_neighbors], obs]
         
         # Save number of neighbors for each sample
         for cond in neighborhood_df.columns:
-            neighborhood_df.loc[adata.obs.index[iCell], cond] = \
-                np.sum(neighbor_vals == cond)
+            neighborhood_df.loc[bc, cond] = np.sum(neighbor_vals == cond)
 
     return neighborhood_df
 
@@ -260,7 +265,7 @@ def sample_density(adata, obs, obs_vals, num_neighbors=200, use_rep='X_pca',
         elif nrow == 1 and ncol > 1: iAx = ax[i]
         else: iAx = ax.flatten()[i]
         sc.pl.umap(adata, color=f'{val1}_over_{val2}_density',
-                   s=30, show=False, ax=iAx, cmap=cmap, vmax=vmax, vmin=-vmax,
+                   show=False, ax=iAx, cmap=cmap, vmax=vmax, vmin=-vmax,
                    title=('$\log_2$({val1} / {val2})\nin neighborhood '
                           + '(N={num_neighbors})'),
                    sort_order=sort_order)

@@ -21,10 +21,10 @@ np.random.seed(seed = 0)
 
 # Or input arguments here
 arg_dict = {
-    'version': 'v1',
+    'version': 'v1', # or 'v2',
     'aligned_genome': 'HT2019_KY21_with_Ens_mito',
     'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
-    'min_num_UMI': [2000, 800], # order: dCMF-ASW, PBS-M
+    'min_num_UMI': [2000, 800], # or [800, 800] # order: dCMF-ASW, PBS-M
     'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
     'run_scrublet': True    # include iff scrublet shouldn't be run
 }
@@ -559,7 +559,7 @@ sc.pp.log1p(adata)
 adata.raw = adata
 
 # Remove lowly expressed genes
-sc.pp.filter_genes(adata, min_cells=5)
+# sc.pp.filter_genes(adata, min_cells=5)
 
 # Identify highly variable genes
 sc.pp.highly_variable_genes(adata)
