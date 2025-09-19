@@ -7,7 +7,7 @@ import os
 import sys
 import time
 from statistics import median
-from tqdm import tqdm
+from sklearn.neighbors import KNeighborsClassifier
 
 import helper_functions as hf
 
@@ -260,37 +260,37 @@ with plt.style.context('tal_paper_spine'):
 # ============================================================================
 # 2g - UMAP density plot
 
-num_neighbors = 200
+# num_neighbors = 200
 
-with plt.style.context('tal_paper_spine'):
-    f, ax = plt.subplots(1, 1)
-    f = hf.sample_density(
-        adata,
-        'sample',
-        [(
-            'GSM8869531_Cr_blood_mannitol',
-            'GSM8869530_Cr_blood_asw'
-        )],
-        num_neighbors=num_neighbors,
-        cmap=hf.cmap_pink2blue_r,
-        sort_order=False,
-        log_offset=1,
-    )
-    plt.close()
+# with plt.style.context('tal_paper_spine'):
+#     f, ax = plt.subplots(1, 1)
+#     f = hf.sample_density(
+#         adata,
+#         'sample',
+#         [(
+#             'GSM8869531_Cr_blood_mannitol',
+#             'GSM8869530_Cr_blood_asw'
+#         )],
+#         num_neighbors=num_neighbors,
+#         cmap=hf.cmap_pink2blue_r,
+#         sort_order=False,
+#         log_offset=1,
+#     )
+#     plt.close()
 
-    # Plot with more control
-    obs = 'GSM8869531_Cr_blood_mannitol_over_GSM8869530_Cr_blood_asw_density'
-    vmax = max(
-        abs(np.percentile(adata.obs[obs], 99)),
-        abs(np.percentile(adata.obs[obs], 1))
-    )
-    sc.pl.umap(adata, color=obs, cmap=hf.cmap_pink2blue_r, sort_order=False,
-               show=False, vmax=vmax, vmin=-vmax)
-    plt.title('')
-    plt.gcf().set_size_inches(2.25, 2)
-    plt.tight_layout()
-    plt.savefig(out_path + '2g.png', dpi=300)
-    plt.close()
+#     # Plot with more control
+#     obs = 'GSM8869531_Cr_blood_mannitol_over_GSM8869530_Cr_blood_asw_density'
+#     vmax = max(
+#         abs(np.percentile(adata.obs[obs], 99)),
+#         abs(np.percentile(adata.obs[obs], 1))
+#     )
+#     sc.pl.umap(adata, color=obs, cmap=hf.cmap_pink2blue_r, sort_order=False,
+#                show=False, vmax=vmax, vmin=-vmax)
+#     plt.title('')
+#     plt.gcf().set_size_inches(2.25, 2)
+#     plt.tight_layout()
+#     plt.savefig(out_path + '2g.png', dpi=300)
+#     plt.close()
 
 # ============================================================================
 # 2h,i - Which cell states are enriched/depleted in PBS-M vs. dCMF-ASW?
@@ -305,80 +305,68 @@ with plt.style.context('tal_paper_spine'):
 # See Scully_Ciona_blood_2025/data/README.md for more info.
 # Alternatively, download to a different folder and adjust the path below.
 
-try:
-    adata.obs['cell_type'] = pd.read_csv(out_path + 'cell_type_annotation.csv',
-                                         index_col=0)
-    with open(out_path + 'cell_type_colors.txt', 'r') as f:
-        adata.uns['cell_type_colors'] = [x.strip() for x in f.readlines()]
+# Import annotated atlas
+repo_dir = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))))
+full_atlas_dataset = os.path.join(
+    repo_dir,
+    'Scully_Ciona_blood_2025',
+    'data',
+    'GSE296253_combined_processed_data.h5ad'
+)
+ad_ref = sc.read_h5ad(full_atlas_dataset)
 
-except:
-    # Import annotated atlas
-    repo_dir = os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__))))
-    full_atlas_dataset = os.path.join(
-        repo_dir,
-        'Scully_Ciona_blood_2025',
-        'data',
-        'GSE296253_combined_processed_data.h5ad'
-    )
-    ad_ref = sc.read_h5ad(full_atlas_dataset)
+# Add cell type information from full dataset
+annotated_pbsm_bc = ad_ref.obs.loc[ad_ref.obs['library']=='220428_1', 'cell_type']
+annotated_pbsm_bc.index = [x.replace('220428_1', 'GSM8869531_Cr_blood_mannitol')
+                        for x in annotated_pbsm_bc.index]
+adata.obs.loc[annotated_pbsm_bc.index, 'cell_type'] = annotated_pbsm_bc.astype('str')
+cell_type_colors = ad_ref.uns['cell_type_colors']
+del ad_ref
 
-    # Add cell type information from full dataset
-    annotated_pbsm_bc = ad_ref.obs.loc[ad_ref.obs['library']=='220428_1', 'cell_type']
-    annotated_pbsm_bc.index = [x.replace('220428_1', 'GSM8869531_Cr_blood_mannitol')
-                            for x in annotated_pbsm_bc.index]
-    adata.obs.loc[annotated_pbsm_bc.index, 'cell_type'] = annotated_pbsm_bc
-    cell_type_colors = ad_ref.uns['cell_type_colors']
-    del ad_ref
-
-    # Using Table S6 of Scully et al. to annotate HA-3/SRC doublets
-    with open('Scully_et_al_2025_atlas/table_s6_doublet_bc_list.csv', 'r') as f:
-        doublet_bc_list = []
+# Using Table S6 of Scully et al. to annotate HA-3/SRC doublets
+with open('Scully_et_al_2025_atlas/table_s6_doublet_bc_list.csv', 'r') as f:
+    doublet_bc_list = []
+    l = f.readline()
+    while l != '':
         l = f.readline()
-        while l != '':
-            l = f.readline()
-            if '220428_1' in l:
-                bc = l.strip().replace('220428_1', 'GSM8869531_Cr_blood_mannitol')
-                doublet_bc_list.append(bc)
-    adata.obs['cell_type'] = adata.obs['cell_type'].astype('str')
-    adata.obs.loc[doublet_bc_list, 'cell_type'] = 'HA-3/SRC doublet'
+        if '220428_1' in l:
+            bc = l.strip().replace('220428_1', 'GSM8869531_Cr_blood_mannitol')
+            doublet_bc_list.append(bc)
+adata.obs['cell_type'] = adata.obs['cell_type'].astype('str')
+adata.obs.loc[doublet_bc_list, 'cell_type'] = 'HA-3/SRC doublet'
 
-    # ------------------------------------
-    # Use annotations from PBS-M sample to annotate other cells
+# ------------------------------------
+# Use annotations from PBS-M sample to annotate other cells
+# (written and adjusted from ChatGPT)
 
-    # Look at 20 nearest neighbors
-    sc.pp.neighbors(adata, n_neighbors=20, n_pcs=50, use_rep='X_pca')
+# Mask for labeled and unlabeled cells
+labels = adata.obs['cell_type'].copy()
+labeled_mask = labels != 'nan'
+unlabeled_mask = ~labeled_mask
 
-    unlabeled_bc = adata.obs.index[adata.obs['cell_type'] == 'nan']
-    count = 1
+X = adata.obsm["X_pca"]
+X_labeled = X[labeled_mask]
+y_labeled = labels[labeled_mask]
+X_unlabeled = X[unlabeled_mask]
 
-    while len(unlabeled_bc) > 0:
-        print(f'Round {count}: {len(unlabeled_bc)} unlabeled barcodes')
+# Fit KNN classifier on labeled cells
+knn = KNeighborsClassifier(n_neighbors=10)
+knn.fit(X_labeled, y_labeled)
 
-        # Count cell state annotations in neighborhood
-        neighborhood_counts = hf.neighborhood_composition(
-            adata,
-            'cell_type',
-            use_existing_neighbor_graph=True,
-            cell_subset=unlabeled_bc
-        )
-        del neighborhood_counts['nan']  # don't look at unlabeled neighbors
-        bc_has_labeled_neighbors = (neighborhood_counts.sum(axis=1) > 0)
+# Predict labels for unlabeled cells
+y_pred = knn.predict(X_unlabeled)
 
-        # Label cell states based on highest number of neighbor labels
-        for bc in unlabeled_bc:
-            these_neighbors = neighborhood_counts.loc[bc, :]
-            if bc_has_labeled_neighbors[bc]:
-                adata.obs.loc[bc, 'cell_type'] = these_neighbors.idxmax()
-        
-        count += 1
-        unlabeled_bc = adata.obs.index[adata.obs['cell_type'] == 'nan']
+# Assign predictions back into obs
+adata.obs.loc[unlabeled_mask, 'cell_type'] = y_pred
 
-    # Save
-    adata.obs['cell_type'].to_csv(out_path + 'cell_type_annotation.csv')
-    with open(out_path + 'cell_type_colors.txt', 'w') as f:
-        for c in adata.uns['cell_type_colors']: f.write(c + '\n')
-
+# Set coloring to match Scully et al. 2025
+adata.obs['cell_type'] = adata.obs['cell_type'].astype('str').astype('category')
+adata.uns['cell_type_colors'] = (
+    list(cell_type_colors[:5])
+    + ["#caa5c9",]
+    + list(cell_type_colors[5:])
+)
 
 # Plot
 with plt.style.context('tal_paper_spine'):
@@ -391,64 +379,70 @@ with plt.style.context('tal_paper_spine'):
     plt.close()
 
 # ------------------------------------
-# Fraction of cells in dCMF-ASW sample
+# Fraction of cells in each sample
 
 df = pd.DataFrame(
     index=[c for c in adata.obs['cell_type'].cat.categories
            if c!='HA-3/SRC doublet'],
-    columns=['num_dasw', 'num_pbsm', 'num_cells']
 )
+adata_dasw = adata[adata.obs['sample'] == 'GSM8869530_Cr_blood_asw']
+adata_pbsm = adata[adata.obs['sample'] == 'GSM8869531_Cr_blood_mannitol']
+# Exclude HA-3/SRC doublet cluster for this analysis
+adata_dasw = adata_dasw[adata_dasw.obs['cell_type'] != 'HA-3/SRC doublet']
+adata_pbsm = adata_pbsm[adata_pbsm.obs['cell_type'] != 'HA-3/SRC doublet']
+
 for c in df.index:
-    samples = adata.obs.loc[adata.obs['cell_type'] == c, 'sample']
-    df.loc[c, 'num_dasw'] = np.sum(samples.values=='GSM8869530_Cr_blood_asw')
-    df.loc[c, 'num_pbsm'] = np.sum(samples.values=='GSM8869531_Cr_blood_mannitol')
-    df.loc[c, 'num_cells'] = len(samples)
-df = df.astype('int')
+    df.loc[c, 'p_dasw'] = (np.sum(adata_dasw.obs['cell_type'] == c)
+                           / adata_dasw.shape[0])
+    df.loc[c, 'p_pbsm'] = (np.sum(adata_pbsm.obs['cell_type'] == c)
+                           / adata_pbsm.shape[0])
+    df.loc[c, 'cell_state_size'] = np.sum(adata.obs['cell_type'] == c)
+df = df.astype('float')
 
 # Ignore cell states with <5 cells total
-df = df[df['num_cells'] >= 5]
-import numpy as np
-df['logfc'] = np.log2(df['num_pbsm'] / df['num_dasw'])
+df = df[df['cell_state_size'] >= 5]
+
+# Log foldchange of proportions
+df['logfc'] = np.log2(df['p_pbsm'] / df['p_dasw'])
 df = df.sort_values(by='logfc')
 
 # Error bars, assuming binomial distribution
-# n = num PBS-M cells
-# N = total num cells
-# (N-n = num dCMF/ASW cells)
-# p = n / N
-# f = log2(n / (N-n)) = log2(p / (1-p))
-# sigma_f = (1 / ln(2)) * sqrt(1 / (N * p * (1-p)))
-overall_n = df['num_pbsm'].sum()
-overall_N = df['num_pbsm'].sum() + df['num_dasw'].sum()
-overall_p = overall_n / overall_N
-overall_fc = np.log2(overall_p / (1-overall_p))
-overall_fc_err = (
-    (1 / np.log(2)) 
-    * np.sqrt(1 / (overall_N * overall_p * (1-overall_p)))
+"""
+p_pbsm = proportion of PBS-M cells in this cell state
+p_dasw = proportion of dCMF-ASW cells in this cell state
+N_pbsm = total # cells in PBS-M
+N_dasw = total # cells in dCMF-ASW
+
+Standard error of a proportion:
+sig_p_pbsm = sqrt(p_pbsm * (1-p_pbsm) / N_pbsm)
+sig_p_dasw = sqrt(p_dasw * (1-p_dasw) / N_dasw)
+
+Log2 fold change:
+f(p_pbsm, p_dasw) = log2(p_pbsm / p_dasw)
+df/dp_pbsm = 1 / (ln(2) * p_pbsm)
+df/dp_dasw = 1 / (ln(2) * p_dasw)
+sig_f = ln(2) * sqrt((sig_p_pbsm^2 / p_pbsm^2) + (sig_p_dasw^2 / p_dasw^2))
+"""
+N_pbsm = adata_pbsm.shape[0]
+N_dasw = adata_dasw.shape[0]
+df['p_pbsm_err'] = np.sqrt(df['p_pbsm'] * (1-df['p_pbsm']) / N_pbsm)
+df['p_dasw_err'] = np.sqrt(df['p_dasw'] * (1-df['p_dasw']) / N_dasw)
+df['logfc_err'] = np.log(2) * np.sqrt(
+    (df['p_pbsm_err']**2 / df['p_pbsm']**2)
+    + (df['p_dasw_err']**2 / df['p_dasw']**2)
 )
 
-df['n'] = df['num_pbsm']
-df['N'] = df['num_pbsm'] + df['num_dasw']
-df['p'] = df['n'] / df['N']
-df['logfc_err'] = (
-    (1 / np.log(2)) 
-    * np.sqrt(1 / (df['N'] * df['p'] * (1-df['p'])))
-)
-
-# # Statistical significance (Welch's t-test)
-# # https://en.wikipedia.org/wiki/Welch%27s_t-test
-# df['t'] = ((df['logfc'] - overall_fc)
-#            / np.sqrt(df['logfc_err']**2 + overall_fc_err**2))
+# Statistical significance (two-tailed Z-test)
+from scipy.stats import norm
+df['z_score'] = (df['logfc'] - 0) / df['logfc_err']
+df['p_val'] = 2 * (1 - norm.cdf(abs(df['z_score'])))
+# Bonferroni correction
+df['p_val_adj'] = df['p_val'] / df.shape[0]
+df['null_rejected'] = (df['p_val_adj'] < 0.01)
 
 # Plot
 with plt.style.context('tal_paper_spine'):
     plt.figure(figsize=(3.75, 2))
-    # plt.scatter(
-    #     x=np.arange(df.shape[0]),
-    #     y=df['logfc'],
-    #     s=df['num_cells'] / 3,
-    #     c="#717171"
-    # )
     plt.bar(
         x=np.arange(df.shape[0]),
         height=df['logfc'],
@@ -457,7 +451,6 @@ with plt.style.context('tal_paper_spine'):
         capsize=1,
         error_kw={'elinewidth': 1}
     )
-    plt.axhline(y=overall_fc, color="#1a8300", linewidth=1.5, alpha=0.8)
 
     plt.axhline(y=0, color='k', linewidth=0.75)
     plt.xticks(ticks=np.arange(df.shape[0]), labels=df.index, rotation=90)
@@ -471,3 +464,26 @@ with plt.style.context('tal_paper_spine'):
     plt.close()
 
 # ============================================================================
+# # Transcriptional differences between dCMF-ASW and PBS-M
+
+# adata.obs['cell_type_sample'] = [
+#     adata.obs.loc[i, 'cell_type'] + ' ' + adata.obs.loc[i, 'sample']
+#     for i in adata.obs.index
+# ]
+# adata.var.index = [g.replace('KY21:', '') for g in adata.var.index]
+
+# this_state = 'HA-1 (phag.)'
+# pbsm_state = f'{this_state} GSM8869531_Cr_blood_mannitol'
+# dasw_state = f'{this_state} GSM8869530_Cr_blood_asw'
+
+# sc.tl.rank_genes_groups(adata, groupby='cell_type_sample', method='wilcoxon',
+#                         groups=[pbsm_state], reference=dasw_state)
+# df = sc.get.rank_genes_groups_df(adata, pbsm_state)
+
+# markers = df.loc[
+#     (np.abs(df['logfoldchanges']) > 1) * (df['pvals_adj'] < 0.05),
+#     'names'
+# ].values
+
+# sc.pl.matrixplot(adata, var_names=markers, groupby='cell_type_sample',
+#                  dendrogram=True, vmax=1)

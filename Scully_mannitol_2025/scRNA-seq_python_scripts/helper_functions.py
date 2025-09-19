@@ -1,11 +1,29 @@
-import sys
 import os
+import pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import scanpy as sc
 from tqdm import tqdm
 from matplotlib.colors import ListedColormap
+
+# ============================================================================
+# Gene homology and annotations, determined by OrthoFinder
+# From Scully et al. 2025 folder
+
+repo_dir = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))))
+path_to_dict = os.path.join(
+    repo_dir,
+    'Scully_Ciona_blood_2025',
+    'helper_functions',
+    'gene_dictionaries'
+)
+
+# Use gene homology determined by OrthoFinder
+with open(os.path.join(path_to_dict, 'crob2hsap.pickle'), 'rb') as fp:
+    ciona2human = pickle.load(fp)
+    human2ciona = pickle.load(fp)
 
 # ============================================================================
 # Colors & colormaps
