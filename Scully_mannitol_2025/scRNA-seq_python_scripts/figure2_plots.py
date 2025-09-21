@@ -11,9 +11,6 @@ from sklearn.neighbors import KNeighborsClassifier
 
 import helper_functions as hf
 
-# Change this path to point to folder containing tal_helper_functions.py
-path_to_dropbox = os.environ['PATH_TO_DROPBOX']
-
 # Set random seed
 np.random.seed(seed = 0)
 
@@ -65,7 +62,7 @@ adict = {}
 # Import counts matrix
 filename_end = '_raw_unfiltered_matrix.h5'
 libs = [d.split(filename_end)[0] for d in os.listdir(data_path)
-        if d.endswith('.h5')]
+        if d.endswith('_raw_unfiltered_matrix.h5')]
 for lib in libs:
     adict[lib] = sc.read_10x_h5(data_path + lib + filename_end)
 
@@ -222,6 +219,7 @@ with plt.style.context('tal_paper'):
 
 with plt.style.context('tal_paper'):
     # % reads in cells (reads which are confidently mapped to transcriptome)
+    # Read in manually from the output of data_quality_metrics.py
     x = ['\n'.join(title_list[l].split(' ')) for l in title_list]
     y = [49306418/145747789, 108362126/145988546]
     y = 100 * np.array(y)
@@ -260,37 +258,37 @@ with plt.style.context('tal_paper_spine'):
 # ============================================================================
 # 2g - UMAP density plot
 
-# num_neighbors = 200
+num_neighbors = 200
 
-# with plt.style.context('tal_paper_spine'):
-#     f, ax = plt.subplots(1, 1)
-#     f = hf.sample_density(
-#         adata,
-#         'sample',
-#         [(
-#             'GSM8869531_Cr_blood_mannitol',
-#             'GSM8869530_Cr_blood_asw'
-#         )],
-#         num_neighbors=num_neighbors,
-#         cmap=hf.cmap_pink2blue_r,
-#         sort_order=False,
-#         log_offset=1,
-#     )
-#     plt.close()
+with plt.style.context('tal_paper_spine'):
+    f, ax = plt.subplots(1, 1)
+    f = hf.sample_density(
+        adata,
+        'sample',
+        [(
+            'GSM8869531_Cr_blood_mannitol',
+            'GSM8869530_Cr_blood_asw'
+        )],
+        num_neighbors=num_neighbors,
+        cmap=hf.cmap_pink2blue_r,
+        sort_order=False,
+        log_offset=1,
+    )
+    plt.close()
 
-#     # Plot with more control
-#     obs = 'GSM8869531_Cr_blood_mannitol_over_GSM8869530_Cr_blood_asw_density'
-#     vmax = max(
-#         abs(np.percentile(adata.obs[obs], 99)),
-#         abs(np.percentile(adata.obs[obs], 1))
-#     )
-#     sc.pl.umap(adata, color=obs, cmap=hf.cmap_pink2blue_r, sort_order=False,
-#                show=False, vmax=vmax, vmin=-vmax)
-#     plt.title('')
-#     plt.gcf().set_size_inches(2.25, 2)
-#     plt.tight_layout()
-#     plt.savefig(out_path + '2g.png', dpi=300)
-#     plt.close()
+    # Plot with more control
+    obs = 'GSM8869531_Cr_blood_mannitol_over_GSM8869530_Cr_blood_asw_density'
+    vmax = max(
+        abs(np.percentile(adata.obs[obs], 99)),
+        abs(np.percentile(adata.obs[obs], 1))
+    )
+    sc.pl.umap(adata, color=obs, cmap=hf.cmap_pink2blue_r, sort_order=False,
+               show=False, vmax=vmax, vmin=-vmax)
+    plt.title('')
+    plt.gcf().set_size_inches(2.25, 2)
+    plt.tight_layout()
+    plt.savefig(out_path + '2g.png', dpi=300)
+    plt.close()
 
 # ============================================================================
 # 2h,i - Which cell states are enriched/depleted in PBS-M vs. dCMF-ASW?

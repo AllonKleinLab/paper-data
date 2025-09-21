@@ -7,6 +7,7 @@ Scully_mannitol_2025/scRNA-seq_python_scripts/raw_unfiltered_data/*
 !Scully_mannitol_2025/scRNA-seq_python_scripts/raw_unfiltered_data/README.md
 !Scully_mannitol_2025/scRNA-seq_python_scripts/raw_unfiltered_data/download_datasets.sh
 Scully_mannitol_2025/scRNA-seq_python_scripts/figure2_plots_output
+Scully_mannitol_2025/scRNA-seq_python_scripts/data_quality_metrics
 Scully_mannitol_2025/scRNA-seq_python_scripts/filtering_and_preprocessing_output
 
 # Large files to exclude in Scully et al. Ciona atlas
