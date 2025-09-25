@@ -16,7 +16,13 @@ np.random.seed(seed = 0)
 # PATHS TO DATA
 
 # Filtered & preprocessed adata
-version = 'v2'
+# v1: UMI/bc thresholds used in preprint
+#version = 'v1'
+# v2: UMI/bc thresholds used in Figure S1
+#version = 'v2'
+# v3: using 10X Cell Ranger's automatic barcode filtering
+version = 'v3'
+
 adata_path = (f'filtering_and_preprocessing_output/{version}/')
 
 # Unfiltered counts matrix, molecule info

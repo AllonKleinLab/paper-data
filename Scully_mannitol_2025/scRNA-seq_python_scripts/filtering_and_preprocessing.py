@@ -20,15 +20,41 @@ np.random.seed(seed = 0)
 # ============================================================================
 # ARGUMENTS/VARIABLES FOR THIS FILTERING
 
-# Or input arguments here
-arg_dict = {
-    'version': 'v3', # or 'v2',
-    'aligned_genome': 'HT2019_KY21_with_Ens_mito',
-    'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
-    'min_num_UMI': [2000, 800], # or [800, 800] # order: dCMF-ASW, PBS-M
-    'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
-    'run_scrublet': True    # include iff scrublet shouldn't be run
-}
+# SET FILTERING PARAMETERS
+# v1: UMI/bc thresholds used in preprint
+#version = 'v1'
+# v2: UMI/bc thresholds used in Figure S1
+#version = 'v2'
+# v3: using 10X Cell Ranger's automatic barcode filtering
+version = 'v3'
+
+if version == 'v1':
+    arg_dict = {
+        'version': 'v1',
+        'aligned_genome': 'HT2019_KY21_with_Ens_mito',
+        'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
+        'min_num_UMI': [2000, 800], # order: dCMF-ASW, PBS-M
+        'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
+        'run_scrublet': True
+    }
+elif version == 'v2':
+    arg_dict = {
+        'version': 'v2',
+        'aligned_genome': 'HT2019_KY21_with_Ens_mito',
+        'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
+        'min_num_UMI': [800, 800],  # order: dCMF-ASW, PBS-M
+        'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
+        'run_scrublet': True
+    }
+elif version == 'v3':
+    arg_dict = {
+        'version': 'v3',
+        'aligned_genome': 'HT2019_KY21_with_Ens_mito',
+        'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
+        'min_num_UMI': ['10x_list', '10x_list'],    # order: dCMF-ASW, PBS-M
+        'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
+        'run_scrublet': True
+    }
 
 # ============================================================================
 # IMPORT COUNT MATRICES
@@ -46,7 +72,7 @@ if not os.path.exists(out_path): os.mkdir(out_path)
 adict = {}
 
 libs = ['_'.join(f.split('_')[:4]) for f in os.listdir(data_path)
-        if f[-3:] == '.h5']
+        if f.endswith('_raw_unfiltered_matrix.h5')]
 for lib in libs:
     # Import counts matrix
     adict[lib] = sc.read_10x_h5(data_path + lib + '_raw_unfiltered_matrix.h5')
@@ -152,8 +178,16 @@ plt.close()
 print('  UMI/barcode')
 
 # Set count thresholds (change in arg_dict above based on plots)
+barcode_passlist = {}
 for i in range(len(libs)):
-    adict[libs[i]].uns['min_num_UMI'] = arg_dict['min_num_UMI'][i]
+    if isinstance(arg_dict['min_num_UMI'][i], int):
+        adict[libs[i]].uns['min_num_UMI'] = arg_dict['min_num_UMI'][i]
+    else:
+        barcode_passlist_df = pd.read_csv(data_path + libs[i] + '_barcodes.tsv',
+                                       header=None)
+        barcode_passlist[libs[i]] = list(barcode_passlist_df.iloc[:, 0])
+        adict[libs[i]].uns['min_num_UMI'] = \
+            adict[libs[i]][barcode_passlist[libs[i]]].obs['total_counts'].min()
 
 ncol = 3
 nrow = len(adict)
@@ -184,7 +218,10 @@ for i, lib in enumerate(libs):
     # elif s == 'ci_dev': ax0.set_ylim(0, 5000)
 
     ntot = len(adict[lib].obs['total_counts'])
-    npass = sum(adict[lib].obs['total_counts'] >= min_num_UMI)
+    if isinstance(arg_dict['min_num_UMI'][i], int):
+        npass = sum(adict[lib].obs['total_counts'] >= min_num_UMI)
+    else:
+        npass = len(barcode_passlist[lib])
     
     xl = np.array(ax0.get_xlim())
     yl = np.array(ax0.get_ylim())
@@ -210,9 +247,6 @@ for i, lib in enumerate(libs):
     
     #if s == 'ci_bl': ax1.set_ylim(0, 1000)
     #elif s == 'ci_dev': ax1.set_ylim(0, 5000)
-
-    ntot = len(adict[lib].obs['total_counts'])
-    npass = sum(adict[lib].obs['total_counts'] >= min_num_UMI)
     
     xl = np.array(ax1.get_xlim())
     yl = np.array(ax1.get_ylim())
@@ -430,13 +464,20 @@ with open(out_path + 'filtering_summary.csv', 'a') as f:
     # QC1. UMIs / barcode
     f.write('\nUMI PER BARCODE\n')
     f.write('Sample,Filter,# barcodes pre-filter,# barcodes post-filter\n')
-    for lib in libs:
-        n_orig = adict[lib].shape[0]
-        adict[lib] = (adict[lib][adict[lib].obs['total_counts'] >=
-                      adict[lib].uns['min_num_UMI']])
-        n_pass = adict[lib].shape[0]
-        f.write('{},>={},{},{}\n'.format(lib, adict[lib].uns['min_num_UMI'],
-                n_orig, n_pass))
+    for i, lib in enumerate(libs):
+        if isinstance(arg_dict['min_num_UMI'][i], int):
+            n_orig = adict[lib].shape[0]
+            adict[lib] = (adict[lib][adict[lib].obs['total_counts'] >=
+                        adict[lib].uns['min_num_UMI']])
+            n_pass = adict[lib].shape[0]
+            f.write('{},>={},{},{}\n'.format(lib, adict[lib].uns['min_num_UMI'],
+                    n_orig, n_pass))
+        else:
+            n_orig = adict[lib].shape[0]
+            adict[lib] = (adict[lib][barcode_passlist[lib]])
+            n_pass = adict[lib].shape[0]
+            f.write('{},>={},{},{}\n'.format(lib, arg_dict['min_num_UMI'][i],
+                    n_orig, n_pass))
 
     # QC2. Mitochondrial fraction
     f.write('\nMITOCHONDRIAL FRACTION\n')

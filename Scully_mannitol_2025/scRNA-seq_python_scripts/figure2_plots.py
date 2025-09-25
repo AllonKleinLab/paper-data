@@ -37,43 +37,39 @@ color_list = {
 
 # SET FILTERING PARAMETERS
 # v1: UMI/bc thresholds used in preprint
-version = 'v1'
+#version = 'v1'
 # v2: UMI/bc thresholds used in Figure S1
 #version = 'v2'
 # v3: using 10X Cell Ranger's automatic barcode filtering
-#version = 'v3'
+version = 'v3'
 
 if version == 'v1':
     arg_dict = {
         'version': 'v1',
-        'max_mito_pct': '10,10',
-        'min_num_UMI': '2000, 800',
-        'min_num_genes': '0,0',
-        'run_scrublet': 'True'
+        'aligned_genome': 'HT2019_KY21_with_Ens_mito',
+        'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
+        'min_num_UMI': [2000, 800], # order: dCMF-ASW, PBS-M
+        'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
+        'run_scrublet': True
     }
 elif version == 'v2':
     arg_dict = {
         'version': 'v2',
-        'max_mito_pct': '10,10',
-        'min_num_UMI': '800, 800',
-        'min_num_genes': '0,0',
-        'run_scrublet': 'True'
+        'aligned_genome': 'HT2019_KY21_with_Ens_mito',
+        'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
+        'min_num_UMI': [800, 800],  # order: dCMF-ASW, PBS-M
+        'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
+        'run_scrublet': True
     }
 elif version == 'v3':
     arg_dict = {
         'version': 'v3',
-        'max_mito_pct': '10,10',
-        'min_num_UMI': '10x_list, 10x_list',
-        'min_num_genes': '0,0',
-        'run_scrublet': 'True'
+        'aligned_genome': 'HT2019_KY21_with_Ens_mito',
+        'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
+        'min_num_UMI': ['10x_list', '10x_list'],    # order: dCMF-ASW, PBS-M
+        'min_num_genes': [0, 0],    # order: dCMF-ASW, PBS-M
+        'run_scrublet': True
     }
-
-# Format arguments with commas into a list of ints
-for a in arg_dict:
-    if ',' in arg_dict[a]:
-        arg_dict[a] = [int(x) for x in arg_dict[a].split(',')]
-    elif 'True' == arg_dict[a] or 'False' == arg_dict[a]:
-        arg_dict[a] = (arg_dict[a] == 'True')
 
 # Update out_path
 out_path = out_path + arg_dict['version'] + '/'
@@ -148,9 +144,15 @@ with plt.style.context('tal_paper'):
         # ax0.set_ylim(0, 10000)
 
         # Include lines for mean UMIs/barcode in empty droplets, print values
-        empty = adict[lib].obs.loc[
-            adict[lib].obs['total_counts'] < adict[lib].uns['min_num_UMI'],
-            'total_counts']
+        if isinstance(arg_dict['min_num_UMI'], int):
+            barcode_passlist = (adict[lib].obs['total_counts']
+                                < adict[lib].uns['min_num_UMI'])
+        else:
+            barcode_passlist_df = pd.read_csv(data_path + libs[i] + '_barcodes.tsv',
+                                header=None)
+            barcode_passlist = list(barcode_passlist_df.iloc[:, 0])
+            barcode_passlist = adict[lib].obs.index.isin(barcode_passlist)
+        empty = adict[lib].obs.loc[~barcode_passlist, 'total_counts']
         th = 10; empty = empty[empty > th]
         val_to_plot = median(empty)
         print(f'{lib} mean UMI/bc for empty droplets (excluding UMI/bc={th})'
@@ -173,9 +175,15 @@ with plt.style.context('tal_paper'):
     x = ['\n'.join(title_list[l].split(' ')) for l in title_list]
     y = []
     for lib in title_list:
-        empty = adict[lib].obs.loc[
-            adict[lib].obs['total_counts'] < adict[lib].uns['min_num_UMI'],
-            'total_counts']
+        if isinstance(arg_dict['min_num_UMI'], int):
+            barcode_passlist = (adict[lib].obs['total_counts']
+                                < adict[lib].uns['min_num_UMI'])
+        else:
+            barcode_passlist_df = pd.read_csv(data_path + lib + '_barcodes.tsv',
+                                              header=None)
+            barcode_passlist = list(barcode_passlist_df.iloc[:, 0])
+            barcode_passlist = adict[lib].obs.index.isin(barcode_passlist)
+        empty = adict[lib].obs.loc[~barcode_passlist, 'total_counts']
         th = 10; empty = empty[empty > th]
         val_to_plot = median(empty)
         y.append(val_to_plot)
@@ -200,10 +208,6 @@ print('\nPlotting mitochondrial fraction')
 print('```````````````````````````````')
 
 with plt.style.context('tal_paper'):
-    N = {}
-    for i in range(len(libs)):
-        N[libs[i]] = arg_dict['min_num_UMI'][::-1][i]
-
     ncol = 1
     nrow = 1#len(adict)
 
@@ -214,7 +218,15 @@ with plt.style.context('tal_paper'):
     for i, lib in enumerate(libs[::-1]):
 
         # Remove droplets passed the UMI threshold
-        to_plot = adict[lib][adict[lib].obs.total_counts > N[lib]]
+        if isinstance(arg_dict['min_num_UMI'], int):
+            barcode_passlist = (adict[lib].obs['total_counts']
+                                < adict[lib].uns['min_num_UMI'])
+        else:
+            barcode_passlist_df = pd.read_csv(data_path + lib + '_barcodes.tsv',
+                                              header=None)
+            barcode_passlist = list(barcode_passlist_df.iloc[:, 0])
+            barcode_passlist = adict[lib].obs.index.isin(barcode_passlist)
+        to_plot = adict[lib][barcode_passlist]
 
         # Print number of cells with >20% mitochondrial fraction
         th = 20
