@@ -7,6 +7,7 @@ import os
 import sys
 import time
 from tqdm import tqdm
+# from kneed import KneeLocator
 
 import helper_functions as hf
 
@@ -21,7 +22,7 @@ np.random.seed(seed = 0)
 
 # Or input arguments here
 arg_dict = {
-    'version': 'v1', # or 'v2',
+    'version': 'v3', # or 'v2',
     'aligned_genome': 'HT2019_KY21_with_Ens_mito',
     'max_mito_pct': [10, 10],   # order: dCMF-ASW, PBS-M
     'min_num_UMI': [2000, 800], # or [800, 800] # order: dCMF-ASW, PBS-M

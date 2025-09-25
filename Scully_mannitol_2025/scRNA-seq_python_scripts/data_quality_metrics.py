@@ -16,7 +16,7 @@ np.random.seed(seed = 0)
 # PATHS TO DATA
 
 # Filtered & preprocessed adata
-version = 'v1'
+version = 'v2'
 adata_path = (f'filtering_and_preprocessing_output/{version}/')
 
 # Unfiltered counts matrix, molecule info
@@ -24,6 +24,8 @@ data_path = 'raw_unfiltered_data/'
 
 # Create output path
 out_path = 'data_quality_metrics/'
+if not os.path.exists(out_path): os.mkdir(out_path)
+out_path += version + '/'
 if not os.path.exists(out_path): os.mkdir(out_path)
 
 # Samples/libraries

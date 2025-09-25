@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 import scanpy as sc
 import scrublet as scr
 import os
@@ -8,6 +9,7 @@ import sys
 import time
 from statistics import median
 from sklearn.neighbors import KNeighborsClassifier
+from scipy.cluster.hierarchy import dendrogram, linkage
 
 import helper_functions as hf
 
@@ -33,14 +35,38 @@ color_list = {
 # ------------------------------------
 # Arguments for this filtering
 
-# Filtration conditions
-arg_dict = {
-    'version': 'vx',
-    'max_mito_pct': '10,10',
-    'min_num_UMI': '2000, 800',
-    'min_num_genes': '0,0',
-    'run_scrublet': 'True'
-}
+# SET FILTERING PARAMETERS
+# v1: UMI/bc thresholds used in preprint
+version = 'v1'
+# v2: UMI/bc thresholds used in Figure S1
+#version = 'v2'
+# v3: using 10X Cell Ranger's automatic barcode filtering
+#version = 'v3'
+
+if version == 'v1':
+    arg_dict = {
+        'version': 'v1',
+        'max_mito_pct': '10,10',
+        'min_num_UMI': '2000, 800',
+        'min_num_genes': '0,0',
+        'run_scrublet': 'True'
+    }
+elif version == 'v2':
+    arg_dict = {
+        'version': 'v2',
+        'max_mito_pct': '10,10',
+        'min_num_UMI': '800, 800',
+        'min_num_genes': '0,0',
+        'run_scrublet': 'True'
+    }
+elif version == 'v3':
+    arg_dict = {
+        'version': 'v3',
+        'max_mito_pct': '10,10',
+        'min_num_UMI': '10x_list, 10x_list',
+        'min_num_genes': '0,0',
+        'run_scrublet': 'True'
+    }
 
 # Format arguments with commas into a list of ints
 for a in arg_dict:
@@ -48,6 +74,10 @@ for a in arg_dict:
         arg_dict[a] = [int(x) for x in arg_dict[a].split(',')]
     elif 'True' == arg_dict[a] or 'False' == arg_dict[a]:
         arg_dict[a] = (arg_dict[a] == 'True')
+
+# Update out_path
+out_path = out_path + arg_dict['version'] + '/'
+if not os.path.exists(out_path): os.mkdir(out_path)
 
 # ------------------------------------
 # Import count matrices
@@ -137,6 +167,32 @@ with plt.style.context('tal_paper'):
     plt.savefig(out_path + '2d.pdf')
     plt.close()
 
+with plt.style.context('tal_paper'):
+    # % reads in cells (reads which are confidently mapped to transcriptome)
+    # Read in from the output of data_quality_metrics.py
+    x = ['\n'.join(title_list[l].split(' ')) for l in title_list]
+    y = []
+    for lib in title_list:
+        empty = adict[lib].obs.loc[
+            adict[lib].obs['total_counts'] < adict[lib].uns['min_num_UMI'],
+            'total_counts']
+        th = 10; empty = empty[empty > th]
+        val_to_plot = median(empty)
+        y.append(val_to_plot)
+    # y = 100 * np.array(y)
+
+    f, ax = plt.subplots(1, 1, figsize=(1.35, 2.25))
+    # plt.bar(x, y, color='#999999')
+    for i in range(len(y)):
+        plt.bar(i, y[i], color=color_list[libs[::-1][i]], alpha=0.65, width=0.7)
+    plt.xticks(ticks=np.arange(len(x)), labels=x, rotation=90)
+    plt.xlim(plt.xlim()[0] - 0.15, plt.xlim()[1] + 0.15)
+    plt.ylabel('Median UMI per barcode\nin empty droplets')
+
+    plt.tight_layout()
+    plt.savefig(out_path + 'empty_umi_per_bc.pdf')
+    plt.close()
+
 # ============================================================================
 # 2e - Mitochondrial fraction (only barcodes which are cells)
 
@@ -151,7 +207,10 @@ with plt.style.context('tal_paper'):
     ncol = 1
     nrow = 1#len(adict)
 
-    fig = plt.figure(figsize = (ncol * 3.15, nrow * 2))
+    if arg_dict['version'] == 'v1':
+        fig = plt.figure(figsize = (ncol * 3.15, nrow * 2))
+    else:
+        fig = plt.figure(figsize = (ncol * 2.3, nrow * 2))
     for i, lib in enumerate(libs[::-1]):
 
         # Remove droplets passed the UMI threshold
@@ -177,16 +236,53 @@ with plt.style.context('tal_paper'):
         ax.set_ylabel('Fraction of cells')
         ax.set_yscale('log')
 
-    ax.legend(loc='center right')
+    if arg_dict['version'] == 'v1':
+        ax.legend(loc='center right')
+    else:
+        ax.legend(loc='upper right')
     fig.tight_layout()
     plt.savefig(out_path + '2e.pdf')
     plt.close()
 
 # ============================================================================
+# 2c - Fraction of reads from droplets with cells
+
+with plt.style.context('tal_paper'):
+    # % reads in cells (reads which are confidently mapped to transcriptome)
+    # Read in from the output of data_quality_metrics.py
+    x = ['\n'.join(title_list[l].split(' ')) for l in title_list]
+    y = []
+    for l in title_list:
+        df = pd.read_csv(f'data_quality_metrics/{arg_dict["version"]}/'
+                         + f'{l}_quality_stats.csv')
+        num = df.loc['Reads confidentally mapped to transcriptome in droplets with cells', 'MAPPING']
+        num = int(num.split(' ')[0])
+        denom = df.loc['Valid reads mapped confidently to transcriptome', 'MAPPING']
+        denom = int(denom)
+        y.append(100 * num / denom)
+    # y = 100 * np.array(y)
+
+    f, ax = plt.subplots(1, 1, figsize=(1.35, 2.25))
+    # plt.bar(x, y, color='#999999')
+    for i in range(len(y)):
+        plt.bar(i, y[i], color=color_list[libs[::-1][i]], alpha=0.65, width=0.7)
+        plt.text(i, y[i]+2, "{:.1f}%".format(y[i]),
+                 horizontalalignment='center', fontweight='bold')
+    plt.xticks(ticks=np.arange(len(x)), labels=x, rotation=90)
+    plt.xlim(plt.xlim()[0] - 0.15, plt.xlim()[1] + 0.15)
+    plt.ylabel('Fraction of reads in\ndroplets with cells (%)')
+    plt.ylim(0, 100)
+
+    plt.tight_layout()
+    plt.savefig(out_path + '2c.pdf')
+    plt.close()
+
+
+# ============================================================================
 # IMPORT PROCESSED DATA
 
 # Import filtered & preprocessed adata
-version = 'v1'
+version = arg_dict['version']
 adata_path = (f'filtering_and_preprocessing_output/{version}/')
 adata = sc.read_h5ad(adata_path + 'adata.h5ad')
 
@@ -212,31 +308,6 @@ with plt.style.context('tal_paper'):
 
     plt.tight_layout()
     plt.savefig(out_path + '2b.pdf')
-    plt.close()
-
-# ============================================================================
-# 2c - Fraction of reads from droplets with cells
-
-with plt.style.context('tal_paper'):
-    # % reads in cells (reads which are confidently mapped to transcriptome)
-    # Read in manually from the output of data_quality_metrics.py
-    x = ['\n'.join(title_list[l].split(' ')) for l in title_list]
-    y = [49306418/145747789, 108362126/145988546]
-    y = 100 * np.array(y)
-
-    f, ax = plt.subplots(1, 1, figsize=(1.35, 2.25))
-    # plt.bar(x, y, color='#999999')
-    for i in range(len(y)):
-        plt.bar(i, y[i], color=color_list[libs[::-1][i]], alpha=0.65, width=0.7)
-        plt.text(i, y[i]+2, "{:.1f}%".format(y[i]),
-                 horizontalalignment='center', fontweight='bold')
-    plt.xticks(ticks=np.arange(len(x)), labels=x, rotation=90)
-    plt.xlim(plt.xlim()[0] - 0.15, plt.xlim()[1] + 0.15)
-    plt.ylabel('Fraction of reads in\ndroplets with cells (%)')
-    plt.ylim(0, 100)
-
-    plt.tight_layout()
-    plt.savefig(out_path + '2c.pdf')
     plt.close()
 
 # ============================================================================
@@ -406,6 +477,9 @@ df = df.sort_values(by='logfc')
 
 # Error bars, assuming binomial distribution
 """
+HOW ERROR BARS WERE CALCULATED
+
+Variable definitions:
 p_pbsm = proportion of PBS-M cells in this cell state
 p_dasw = proportion of dCMF-ASW cells in this cell state
 N_pbsm = total # cells in PBS-M
@@ -444,7 +518,7 @@ with plt.style.context('tal_paper_spine'):
     plt.bar(
         x=np.arange(df.shape[0]),
         height=df['logfc'],
-        yerr=df['logfc_err'] * 1.98,
+        yerr=df['logfc_err'] * 1.96,
         color="#888888",
         capsize=1,
         error_kw={'elinewidth': 1}
@@ -462,26 +536,113 @@ with plt.style.context('tal_paper_spine'):
     plt.close()
 
 # ============================================================================
-# # Transcriptional differences between dCMF-ASW and PBS-M
+# Transcriptional differences between dCMF-ASW and PBS-M
 
-# adata.obs['cell_type_sample'] = [
-#     adata.obs.loc[i, 'cell_type'] + ' ' + adata.obs.loc[i, 'sample']
-#     for i in adata.obs.index
-# ]
-# adata.var.index = [g.replace('KY21:', '') for g in adata.var.index]
+adata.obs['cell_type_sample'] = [
+    adata.obs.loc[i, 'cell_type'] + ' ' + adata.obs.loc[i, 'sample']
+    for i in adata.obs.index
+]
+markers_dict = {}
 
-# this_state = 'HA-1 (phag.)'
-# pbsm_state = f'{this_state} GSM8869531_Cr_blood_mannitol'
-# dasw_state = f'{this_state} GSM8869530_Cr_blood_asw'
+for this_state in adata.obs['cell_type'].cat.categories:
+    # this_state = 'HA-3'
+    pbsm_state = f'{this_state} GSM8869531_Cr_blood_mannitol'
+    dasw_state = f'{this_state} GSM8869530_Cr_blood_asw'
 
-# sc.tl.rank_genes_groups(adata, groupby='cell_type_sample', method='wilcoxon',
-#                         groups=[pbsm_state], reference=dasw_state)
-# df = sc.get.rank_genes_groups_df(adata, pbsm_state)
+    if dasw_state in adata.obs['cell_type_sample'].values:
 
-# markers = df.loc[
-#     (np.abs(df['logfoldchanges']) > 1) * (df['pvals_adj'] < 0.05),
-#     'names'
-# ].values
+        # Marker genes
+        sc.tl.rank_genes_groups(adata, groupby='cell_type_sample', method='wilcoxon',
+                                groups=[pbsm_state], reference=dasw_state)
+        df = sc.get.rank_genes_groups_df(adata, pbsm_state)
+        markers = df.loc[
+            (np.abs(df['logfoldchanges']) > 1) * (df['pvals_adj'] < 0.05),
+            'names'
+        ].values
 
-# sc.pl.matrixplot(adata, var_names=markers, groupby='cell_type_sample',
-#                  dendrogram=True, vmax=1)
+        # Centroids of clusters
+        centr = pd.DataFrame(index=adata.obs['cell_type_sample'].cat.categories,
+                            columns=markers)
+        for state in centr.index:
+            these_cells = adata.obs['cell_type_sample'] == state
+            centr.loc[state] = np.mean(adata[these_cells, markers].X, axis=0)
+        centr = (centr - centr.mean()) / centr.std()
+        centr = centr.loc[[pbsm_state, dasw_state], :]
+        centr = centr.astype('float')
+
+        # ------------------------------------
+        # Order genes etc. for plotting
+
+        centr = centr.sort_values(axis=1, by=dasw_state, ascending=False)
+
+        # # Hierarchically cluster genes
+        # with plt.style.context('tal_paper'):
+        #     f = plt.figure(figsize=(3, 3))
+        #     ax = plt.subplot(1, 1, 1)
+        #     linkage_data = linkage(centr[markers].T, method='single',
+        #                            metric='cosine', optimal_ordering=True)
+        #     dendr = dendrogram(linkage_data, labels=centr[markers].columns,
+        #                        count_sort='descending', color_threshold=0.00532)
+        #     # plt.tight_layout()
+        #     # plt.savefig(out_path + f'{"-".join(cl_ordered)}_gene_dendrogram.pdf')
+        #     plt.close()
+        # gene_order = np.array(dendr['ivl'][::-1])
+        # cluster_arr = np.array(dendr['leaves_color_list'])
+        # # gene_order_cluster_specific = gene_order[cluster_arr != 'C1']
+
+        # ------------------------------------
+        # Plot expression for each cluster and animal
+
+        with plt.style.context('tal_paper_spine'):
+            f, ax = plt.subplots(1, 1, figsize=(1.5, 3.5))
+
+            # f = plt.figure(figsize=(1, 1.75))#clustermtx.shape[1]/35))
+            # ax = plt.subplot(1, 1, 1)
+            sns.heatmap(centr.T, cmap='RdBu_r', center=0, vmax=2, vmin=-2,
+                        cbar_kws={'label': 'Z-score across\ncell types'},
+                        xticklabels=True, yticklabels=False, ax=ax)
+            plt.ylabel('Marker genes')
+            ax.spines.top.set_visible(True)
+            ax.spines.right.set_visible(True)
+            ax.spines.left.set_visible(True)
+            ax.spines.bottom.set_visible(True)
+
+            # Plot dendrogram
+            # from scipy.cluster import hierarchy
+            # Z = hierarchy.linkage(clustermtx, 'single')
+            # dn = hierarchy.dendrogram(Z)
+
+            # Save
+            plt.tight_layout()
+            plt.savefig(out_path + f'expr_heatmap_{this_state.replace("/", "-")}.pdf')
+            plt.close()
+
+        markers_dict[this_state] = markers
+
+# Markers shared across multiple cell states
+markers_dict = {c: list(markers_dict[c]) for c in markers_dict}
+
+# Count how many lists each gene appears in
+from collections import Counter
+counts = Counter()
+for genes in markers_dict.values():
+    counts.update(set(genes))  # use set() so duplicates within a list are not double counted
+
+# Threshold: at least half the lists
+threshold = len(markers_dict) / 3
+
+# Get genes meeting the threshold
+result = [gene for gene, c in counts.items() if c >= threshold]
+
+for g in result:
+    g = g.replace('KY21:', '')
+    if g in hf.ciona2human:
+        print(g, hf.ciona2human[g])
+
+centr = pd.DataFrame(index=adata.obs['cell_type_sample'].cat.categories,
+                     columns=result)
+for state in centr.index:
+    these_cells = adata.obs['cell_type_sample'] == state
+    centr.loc[state] = np.mean(adata[these_cells, result].X, axis=0)
+centr = (centr - centr.mean()) / centr.std()
+centr = centr.astype('float')
