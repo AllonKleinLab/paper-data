@@ -37,11 +37,11 @@ color_list = {
 
 # SET FILTERING PARAMETERS
 # v1: UMI/bc thresholds used in preprint
-#version = 'v1'
+version = 'v1'
 # v2: UMI/bc thresholds used in Figure S1
 #version = 'v2'
 # v3: using 10X Cell Ranger's automatic barcode filtering
-version = 'v3'
+#version = 'v3'
 
 if version == 'v1':
     arg_dict = {
@@ -144,9 +144,9 @@ with plt.style.context('tal_paper'):
         # ax0.set_ylim(0, 10000)
 
         # Include lines for mean UMIs/barcode in empty droplets, print values
-        if isinstance(arg_dict['min_num_UMI'], int):
+        if isinstance(arg_dict['min_num_UMI'][i], int):
             barcode_passlist = (adict[lib].obs['total_counts']
-                                < adict[lib].uns['min_num_UMI'])
+                                > adict[lib].uns['min_num_UMI'])
         else:
             barcode_passlist_df = pd.read_csv(data_path + libs[i] + '_barcodes.tsv',
                                 header=None)
@@ -175,9 +175,9 @@ with plt.style.context('tal_paper'):
     x = ['\n'.join(title_list[l].split(' ')) for l in title_list]
     y = []
     for lib in title_list:
-        if isinstance(arg_dict['min_num_UMI'], int):
+        if isinstance(arg_dict['min_num_UMI'][i], int):
             barcode_passlist = (adict[lib].obs['total_counts']
-                                < adict[lib].uns['min_num_UMI'])
+                                > adict[lib].uns['min_num_UMI'])
         else:
             barcode_passlist_df = pd.read_csv(data_path + lib + '_barcodes.tsv',
                                               header=None)
@@ -218,9 +218,9 @@ with plt.style.context('tal_paper'):
     for i, lib in enumerate(libs[::-1]):
 
         # Remove droplets passed the UMI threshold
-        if isinstance(arg_dict['min_num_UMI'], int):
+        if isinstance(arg_dict['min_num_UMI'][i], int):
             barcode_passlist = (adict[lib].obs['total_counts']
-                                < adict[lib].uns['min_num_UMI'])
+                                > adict[lib].uns['min_num_UMI'])
         else:
             barcode_passlist_df = pd.read_csv(data_path + lib + '_barcodes.tsv',
                                               header=None)
@@ -271,7 +271,7 @@ with plt.style.context('tal_paper'):
         num = int(num.split(' ')[0])
         denom = df.loc['Valid reads mapped confidently to transcriptome', 'MAPPING']
         denom = int(denom)
-        y.append(100 * num / denom)
+        y.append(100 - (100 * num / denom))
     # y = 100 * np.array(y)
 
     f, ax = plt.subplots(1, 1, figsize=(1.35, 2.25))
@@ -282,7 +282,7 @@ with plt.style.context('tal_paper'):
                  horizontalalignment='center', fontweight='bold')
     plt.xticks(ticks=np.arange(len(x)), labels=x, rotation=90)
     plt.xlim(plt.xlim()[0] - 0.15, plt.xlim()[1] + 0.15)
-    plt.ylabel('Fraction of reads in\ndroplets with cells (%)')
+    plt.ylabel('Fraction of reads in\nempty droplets (%)')
     plt.ylim(0, 100)
 
     plt.tight_layout()
