@@ -5,6 +5,8 @@ scRNA-seq data of _C. robusta_ blood can be viewed interactively and downloaded 
 
 Scripts in this directory expect the _C. robusta_ blood dataset, as well as human and zebrafish datasets, to be downloaded and added to the `data/` subfolder. See that subfolder's `README.md` file for more details.
 
+A copy of these scripts from the time of publication is available on Zenodo: [https://doi.org/10.5281/zenodo.17209147](https://doi.org/10.5281/zenodo.17209147)
+
 ## Code in This Directory
 
 ### Subfolder `helper_functions/`
@@ -18,6 +20,7 @@ Contains several helper function files used in scripts throughout the folder.
 - `napari_image_analysis_pipeline/` contains the custom image analysis pipeline written with napari, used to process image files and to match cells between live and post-HCR FISH rounds of imaging.
 
 ### Subfolder `scRNA-seq_analysis/`
+- `gene_enrichment_analysis/` contains scripts for performing gene enrichment analysis in _C. robusta_.
 - `go_enrichment_analysis/` contains scripts for performing GO enrichment analysis in _C. robusta_.
 - `differentiation_hierarchy_analysis/` contains scripts for performing differentiation hierarchy anlaysis on the data.
 

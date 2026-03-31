@@ -1,0 +1,15 @@
+paths : 
+  rsem_dir : ''
+  python_dir : ''
+  samtools_dir : ''
+parameters : 
+  output_arguments:
+    output_unaligned_reads_to_other_fastq: False
+    filter_alignments_to_softmasked_regions: False
+  trimmomatic_arguments:
+    LEADING: "28"
+    SLIDINGWINDOW: "4:20"
+    MINLEN: "16"
+    argument_order: ['LEADING', 'SLIDINGWINDOW', 'MINLEN']
+  low_complexity_filter_arguments:
+    max_low_complexity_fraction : 0.50

@@ -24,7 +24,7 @@ if not os.path.exists(out_path): os.mkdir(out_path)
 # SET UP FOR SCRNA PLOTS
 
 title_list = ['dCMF-ASW', 'PBS-M']
-color_list = ['#147dbe', '#ab004d']#np.array(hf.palette1)[[0, 2]].tolist()
+color_list = ['#147dbe', '#ab004d']
 
 # ------------------------------------
 # Arguments for this filtering

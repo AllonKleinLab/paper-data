@@ -11,7 +11,7 @@ Key files in this folder:
 ## Image analysis pipeline use
 
 ### Opening images
-Make sure the images for the sample to be analyzed are arranged as described below in "[Subfolder structure](#subfolder-structure)". _[TO DO: Add instructions for downloading the example images.]_
+Make sure the images for the sample to be analyzed are arranged as described below in "[Subfolder structure](#subfolder-structure)". An example set of images for cluster 15/HA-4 can be downloaded from Zenodo ([link](https://zenodo.org/records/17209147)) - download the widefield.zip and confocal.zip files, then move them to the folder specified in "[Subfolder structure](#subfolder-structure)".
 
 To open an image withe the napari pipeline, run:
 ```
@@ -51,7 +51,7 @@ The layers in the napari viewer are:
 3. If helfpul for more easily matching cells between rounds of imaging, the _pre-FISH live_ images can be shifted relative to the others. Use the widget second from the top right to adjust x and y, then click "Shift live images". For the example sample, we recommend setting x=0 and y=45.
 
 ### Saving cropped images of single cells
-The pipeline is designed to easily save cropped images of individual cells' live morphologies and HCR FISH fluorescence. [This video](https://youtu.be/V9NSjeSv_N4) shows how to use the viewer to save cropped images of a marker-positive cell.
+The pipeline is designed to easily save cropped images of individual cells' live morphologies and HCR FISH fluorescence. <a href="https://youtu.be/V9NSjeSv_N4" target="_blank">This video</a> shows how to use the viewer to save cropped images of a marker-positive cell.
 
 To save a cropped image of a cell:
 1. Identify the marker-positive cell based on HCR FISH fluorescence.
