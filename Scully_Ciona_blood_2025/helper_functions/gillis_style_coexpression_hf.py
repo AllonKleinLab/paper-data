@@ -9,8 +9,6 @@ from scipy.stats import rankdata
 
 # Change this path to point to folder containing gene_hf.py
 # This imports dictionaries and functions for easily converting gene ids
-path_to_dropbox = os.environ['PATH_TO_DROPBOX']
-sys.path.append(path_to_dropbox + 'klein_lab/resources/helper_functions')
 import scrna_helper_functions as hf
 
 # ============================================================================
