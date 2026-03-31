@@ -1,4 +1,4 @@
-This folder contains auxillary code for the preprint: [insert citation]
+This folder contains auxillary code for the paper: https://doi.org/10.1016/j.cub.2025.10.032
 
 ## Data Availability
 scRNA-seq data of _C. robusta_ blood can be viewed interactively and downloaded from [https://kleintools.hms.harvard.edu/paper_websites/scully_ciona_robusta_blood/](https://kleintools.hms.harvard.edu/paper_websites/scully_ciona_robusta_blood/). Downloads are also available from the Gene Expression Omnibus (GEO) repository: Series [GSE296253](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE296253) (full processed data and May 2023 libraries), and Sample GSM8869531 from Series [GSE292926](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE292926) (April 2022 library).
