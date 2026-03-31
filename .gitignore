@@ -17,15 +17,10 @@ Scully_Ciona_blood_2025/scRNA-seq_analysis/gene_enrichment_analysis/kegg_pathway
 Scully_Ciona_blood_2025/scRNA-seq_analysis/differentiation_hierarchy_analysis/differentiation_graph_output/*
 Scully_Ciona_blood_2025/species_comparisons/gs_plots/gs_plots_Hs_vs_Cr_output/*
 Scully_Ciona_blood_2025/species_comparisons/gs_plots/gs_plots_Hs_vs_Dr_output/*
-<<<<<<< HEAD
 Scully_Ciona_blood_2025/species_comparisons/coexpression_conservation/coexpr_cons_Hs_vs_Cr_output/*
 Scully_Ciona_blood_2025/species_comparisons/coexpression_conservation/coexpr_cons_Hs_vs_Dr_output/*
 Scully_Ciona_blood_2025/species_comparisons/coexpression_conservation/tf_coexpr_Hs_vs_Cr_output/*
 Scully_Ciona_blood_2025/species_comparisons/coexpression_conservation/tf_coexpr_Hs_vs_Dr_output/*
-=======
-Scully_Ciona_blood_2025/species_comparisons/coexpression_analysis/gillis_style_coexpression/*
-Scully_Ciona_blood_2025/species_comparisons/coexpression_analysis/tf_coexpression/*
->>>>>>> master
 Scully_Ciona_blood_2025/HCR_FISH/napari_image_analysis_pipeline/raw_images/*
 !Scully_Ciona_blood_2025/HCR_FISH/napari_image_analysis_pipeline/raw_images/SAMPLE_INFO.csv
 Scully_Ciona_blood_2025/HCR_FISH/napari_image_analysis_pipeline/image_analysis_pipeline_output/*
